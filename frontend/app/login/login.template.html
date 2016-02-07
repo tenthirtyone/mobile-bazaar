@@ -1,0 +1,18 @@
+<div class="container-fluid">
+  <div class="row-fluid"> 
+    <div class="col-xs-12 col-md-4 col-md-offset-3">
+      <form class="login-form">
+        <fieldset class="form-group">
+          <label for="exampleInputEmail1">Email address</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+          <small class="text-muted" ng-model="login.credentials.username">We'll never share your email with anyone else.</small>
+        </fieldset>
+        <fieldset class="form-group">
+          <label for="exampleInputPassword1">Password</label>
+          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" ng-model="login.credentials.password">
+        </fieldset>
+        <button type="submit" class="btn btn-primary" ng-click="login.login(login.credentials)" ui-sref="home">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>

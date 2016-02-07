@@ -1,0 +1,7 @@
+{
+  "WEB_SERVER_PORT": 28469,
+  "RUN_MODE": "debug",
+  "SECRET_SEED": "sneakysquirrels--replaceme--",
+  "USERNAME": "test",
+  "PASSWORD": "test"
+}

@@ -1,0 +1,23 @@
+{
+  "name": "angular_template",
+  "description": "Starting point for Angular Front Ends",
+  "main": "app/index.html",
+  "authors": [
+    "Alex Gorale"
+  ],
+  "license": "BSD3",
+  "moduleType": [],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.8",
+    "angular-ui-router": "~0.2.15"
+  }
+}

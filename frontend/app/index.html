@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js" ng-app="angular-template"> <![endif]-->  
+<!--[if lt IE ]> <html lang="en" class="ie9 no-js" ng-app="angular-template"> <![endif]-->  
+<!--[if !IE]><!--> <html lang="en" ng-app="angular-template"> <!--<![endif]-->  
+<head>
+  <title>Modular Angular Template</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">    
+  <!-- build:css -->
+  <link rel="stylesheet" href="styles/styles.scss">
+  <!-- endbuild -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-7s5uDGW3AHqw6xtJmNNtr+OBRJUlgkNJEo78P4b0yRw= sha512-nNo+yCHEyn0smMxSswnf/OnX6/KwJuZTlNZBjauKhTK0c+zT+q5JOCx0UFhXQ6rJR9jg6Es8gPuD2uZcYDLqSw==" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha256-KXn5puMvxCw+dAYznun+drMdG1IFl3agK0p/pqT9KAo= sha512-2e8qq0ETcfWRI4HJBzQiA3UoyFk6tbNyG+qSaIBZLyW9Xf3sWZHN/lxe9fTh1U45DpPf07yj94KsUHHWe4Yk1A==" crossorigin="anonymous">     </script>
+  <!-- Shims for old browsers -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div class="page-wrapper">
+    <ui-view></ui-view>
+  </div>
+  
+  <!-- build:vendors -->
+  <!-- Will be replacing. I'm letting gulp handle my sourcing here -->
+  <scripts src="scripts/vendors.js"></scripts>
+  <!-- endbuild -->
+  <!-- build:scripts -->
+  <!-- This gets hefty with a modular design. I'm letting gulp handle my sourcing here -->
+  <scripts src="scripts/scripts.js"></scripts>
+  <!-- endbuild -->
+</body>
+</html>
