@@ -13,8 +13,7 @@ function getProfile(callback) {
     if (err) {
       return callback({success: false, msg: 'getProfile failed, check OB Backend'});
     }
-    console.log(res);
-    return callback(res.body);
+    return callback(null, res.body);
   });
 }
 

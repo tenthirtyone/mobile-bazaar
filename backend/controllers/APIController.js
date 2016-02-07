@@ -19,18 +19,20 @@ router.post("/login", function(req, res) {
 });
 
 router.get("/profile", function(req, res) {
-  /*AuthService.checkToken(req.headers.token, function(err, token) {
-    if (err) {
-      res.status(404).json({error: err});
-    }
+  AuthService.checkToken(req.headers.token, function(err) {
+  if (err) {
+    res.status(404).json({error: err});
+  }
+    setTimeout(function() {
+    console.log('Blah blah blah blah extra-blah');
+}, 3000);
   });
-  */  
-  var userProfile;
+  
   ProfService.getProfile(function(err, profile){
     if (err) {
       res.status(404).json(err);
     }  
-    res.send(profile);
+      res.send({profile: profile});
   });
   
 });

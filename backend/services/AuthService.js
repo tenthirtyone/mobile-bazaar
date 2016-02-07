@@ -16,7 +16,6 @@ function checkToken(userToken, callback) {
   } else {
     return callback({success: false, msg: 'Auth failed, missing valid token'});
   }
-  
 }
 
 function getToken() {
