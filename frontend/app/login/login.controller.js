@@ -12,13 +12,22 @@
       username: '',
       password: ''
     };
+    vm.loginSuccess = true;
     
-    vm.login = function(credentials) {
-      LoginService.Login(credentials);
-    };
+    vm.login = getLogin;
+    vm.loginErrorMsg = getErrorMsg;
+    vm.isLoginError = isLoginError;
     
-    return vm;
+    function getErrorMsg() {
+      return LoginService.getErrorMsg();
+    }
     
+    function getLogin(credentials) {
+      LoginService.Login(credentials)
+    }
+    
+    function isLoginError() {
+      return LoginService.isLoginError();
+    }
   }
-  
 }());

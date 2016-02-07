@@ -12,7 +12,7 @@ module.exports = router;
 router.post("/login", function(req, res) {
   AuthService.login(req.body, function(err, result) {
     if (err) {
-      res.status(404).json({error: err});
+      res.status(401).json({error: err});
     }
     res.send(result);
   })
@@ -53,11 +53,8 @@ router.post("/test/token", function(req, res) {
   })
 });
 
-router.post("/register", function(req, res) {
-  AuthService.register(req.body, function(err, result) {
-    if (err) {
-      res.status(404).json({error: err});
-    }
-    res.send(req.body);
-  });  
+router.post("/test", function(req, res) {
+
+    res.send('test');
+
 });

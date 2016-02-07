@@ -2,6 +2,7 @@
 
 var config = require('config');
 var express = require('express');
+var cors = require('cors');
 var helmet = require('helmet');
 var winston = require('winston');
 var morgan = require('morgan');
@@ -14,6 +15,7 @@ var createDomain = require('domain').create;
 var app = express();
 app.set('port', config.WEB_SERVER_PORT);
 
+app.use(cors());
 app.use(helmet());
 
 app.use(morgan('dev'));

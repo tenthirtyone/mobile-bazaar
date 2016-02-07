@@ -7,4 +7,13 @@
     'ui.router'
   ]);
    
+  // Response Headers
+  angular.module('mobile-bazaar')
+  .config(['$httpProvider', function($httpProvider) {
+      $httpProvider.defaults.headers.common = {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+      };       
+  }]);  
+
 }());
