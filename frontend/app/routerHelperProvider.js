@@ -3,7 +3,7 @@
   // https://github.com/johnpapa/angular-styleguide
   
   angular
-    .module('angular-template')
+    .module('mobile-bazaar')
     .provider('routerHelper', routerHelperProvider);
 
   routerHelperProvider.$inject = ['$locationProvider', '$stateProvider', '$urlRouterProvider'];

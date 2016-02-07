@@ -1,13 +1,14 @@
 (function() {
   'use strict';
   
-  angular.module('angular-template.login')
+  angular.module('mobile-bazaar.login')
   .service('LoginService', LoginService);
   
   LoginService.$inject = ['$http'];
   
   function LoginService($http) {
     var login = true;
+    var APIURL = 'localhost:28469/api/login';
     
     return {
       Login: Login    

@@ -1,9 +1,9 @@
 (function() {
   'use strict';
     
-  angular.module('angular-template', [
-    'angular-template.home',
-    'angular-template.login',
+  angular.module('mobile-bazaar', [
+    'mobile-bazaar.home',
+    'mobile-bazaar.login',
     'ui.router'
   ]);
    

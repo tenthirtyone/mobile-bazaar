@@ -1,7 +1,7 @@
 (function() {
   'use strict';
   angular
-    .module('angular-template.home')
+    .module('mobile-bazaar.home')
     .run(appRun);
 
   appRun.$inject = ['routerHelper'];

@@ -2,7 +2,7 @@
   'use strict';
   
   angular
-    .module('angular-template.home')
+    .module('mobile-bazaar.home')
     .directive('homeTile', homeTile);
 
   function homeTile() {

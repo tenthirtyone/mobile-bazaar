@@ -1,7 +1,7 @@
 (function() {
   'use strict';
   
-  angular.module('angular-template.home')
+  angular.module('mobile-bazaar.home')
   .controller('HomeController', HomeController);
   
   HomeController.$inject = ['HomeService'];

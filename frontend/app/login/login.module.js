@@ -1,6 +1,6 @@
 (function() {
   'use strict';
   
-  angular.module('angular-template.login', []);
+  angular.module('mobile-bazaar.login', []);
   
 }());
