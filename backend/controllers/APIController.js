@@ -19,22 +19,29 @@ router.post("/login", function(req, res) {
 });
 
 router.get("/profile", function(req, res) {
-  AuthService.checkToken(req.headers.token, function(err) {
-  if (err) {
-    res.status(404).json({error: err});
-  }
-    setTimeout(function() {
-    console.log('Blah blah blah blah extra-blah');
-}, 3000);
-  });
   
-  ProfService.getProfile(function(err, profile){
-    if (err) {
-      res.status(404).json(err);
-    }  
-      res.send({profile: profile});
+  async.waterfall([
+    function validateToken(callback) {
+      AuthService.checkToken(req.headers.token, function(err, token) {
+        if (err) {
+          return callback({error: err});
+        }
+        return callback(null, token);
+      });
+    },
+    function(token, callback) {
+      ProfService.getProfile(function(err, profile){
+        if (err) {
+          return callback(err);
+        }  
+          return callback(null, token, profile);
+      });      
+    }], function(err, token, profile) {
+      if (err) {
+        res.status(404).json({error: err});
+      }
+    res.send({token: token.token, profile: profile.profile});
   });
-  
 });
 
 router.post("/test/token", function(req, res) {
