@@ -5,6 +5,7 @@ var config = require("config");
 var async = require("async");
 var router = express.Router();
 var AuthService = require("../services/AuthService.js");
+var ProfService = require("../services/ProfileService.js");
 
 module.exports = router;
 
@@ -18,14 +19,20 @@ router.post("/login", function(req, res) {
 });
 
 router.get("/profile", function(req, res) {
-  AuthService.checkToken(req.headers.token, function(err, token) {
+  /*AuthService.checkToken(req.headers.token, function(err, token) {
     if (err) {
       res.status(404).json({error: err});
     }
   });
+  */  
+  var userProfile;
+  ProfService.getProfile(function(err, profile){
+    if (err) {
+      res.status(404).json(err);
+    }  
+    res.send(profile);
+  });
   
-  console.log(AuthService.getToken());
-  res.send(AuthService.getToken());
 });
 
 router.post("/test/token", function(req, res) {
