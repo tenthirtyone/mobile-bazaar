@@ -15,7 +15,12 @@ var createDomain = require('domain').create;
 var app = express();
 app.set('port', config.WEB_SERVER_PORT);
 
-app.use(cors());
+var corsOptions = {
+  origin: 'http://localhost',
+  exposedHeaders: 'token'
+};
+
+app.use(cors(corsOptions));
 app.use(helmet());
 
 app.use(morgan('dev'));

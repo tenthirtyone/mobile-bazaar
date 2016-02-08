@@ -4,7 +4,8 @@
   angular.module('mobile-bazaar', [
     'mobile-bazaar.home',
     'mobile-bazaar.login',
-    'ui.router'
+    'ui.router',
+    'ngStorage'
   ]);
    
   // Response Headers
@@ -13,7 +14,6 @@
       $httpProvider.defaults.headers.common = {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
-      };       
-  }]);  
-
+      };     
+  }]);    
 }());

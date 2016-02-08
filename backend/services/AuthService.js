@@ -46,11 +46,10 @@ function login(userData, callback) {
     
     token = jwt.sign({ username: config.USERNAME }, config.SECRET_SEED);
     
-    return callback(null, {
-      success: true, 
-      msg: 'Auth successful.',
-      token: token
-             });
+    return callback(null, token, {
+                                  success: true, 
+                                  msg: 'Auth successful.',
+                                         });
   }
   
   return callback({success: false, msg: 'Auth failed, credentials failed.'});  

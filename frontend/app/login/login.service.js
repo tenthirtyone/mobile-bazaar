@@ -4,9 +4,9 @@
   angular.module('mobile-bazaar.login')
   .service('LoginService', LoginService);
   
-  LoginService.$inject = ['$http'];
+  LoginService.$inject = ['$http', '$state'];
   
-  function LoginService($http) {
+  function LoginService($http, $state) {
     var login = true;
     var APIURL = 'http://localhost:28469/api/login';
     var loginError = false;
@@ -32,7 +32,8 @@
                   password: credentials.password})
       .then(function(res) {
         //Store token
-        console.log(res.data.token);
+        console.log('Service Response:');
+        console.log(res);
         loginError = false;
         loginErrorMsg = '';
       }) 
