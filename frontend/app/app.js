@@ -2,7 +2,7 @@
   'use strict';
     
   angular.module('mobile-bazaar', [
-    'mobile-bazaar.home',
+    'mobile-bazaar.profile',
     'mobile-bazaar.login',
     'ui.router',
     'ngStorage'

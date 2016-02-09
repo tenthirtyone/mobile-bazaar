@@ -1,7 +1,7 @@
 (function() {
   'use strict';
   angular
-    .module('mobile-bazaar.home')
+    .module('mobile-bazaar.profile')
     .run(appRun);
 
   appRun.$inject = ['routerHelper'];
@@ -13,12 +13,12 @@
   function getStates() {
     return [
       {
-        state: 'home',
+        state: 'profile',
         config: {
-          url: '/home',
-          controller: 'HomeController',
-          controllerAs: "home",
-          templateUrl: 'views/home.template.html'
+          url: '/profile',
+          controller: 'ProfileController',
+          controllerAs: "profile",
+          templateUrl: 'views/profile.template.html'
         }
       }
     ];

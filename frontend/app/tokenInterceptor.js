@@ -13,7 +13,6 @@
             return config;
           },
           response: function(response) {
-            console.log('Response:');
             if(response.headers('token')) {
               $localStorage.token = response.headers('token');
             }

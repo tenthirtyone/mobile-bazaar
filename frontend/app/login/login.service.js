@@ -31,9 +31,7 @@
                  {username: credentials.username, 
                   password: credentials.password})
       .then(function(res) {
-        //Store token
-        console.log('Service Response:');
-        console.log(res);
+        $state.go('profile');
         loginError = false;
         loginErrorMsg = '';
       }) 
