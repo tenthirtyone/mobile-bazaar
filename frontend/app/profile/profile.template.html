@@ -1,4 +1,8 @@
 <div class="container">
   <h2>Profile</h2>
-  {{profile.profile()}}
+  {{profile.guid()}}
+  {{profile.website()}}
+  
+  
+  <div ng-repeat="(key, value) in profile.profile()">{{key}} : {{value}}</div>
 </div>

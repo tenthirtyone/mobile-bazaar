@@ -23,7 +23,7 @@
     }
     
     function getLogin(credentials) {
-      LoginService.Login(credentials)
+      LoginService.Login(credentials);
     }
     
     function isLoginError() {
