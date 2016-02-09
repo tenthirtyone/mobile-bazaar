@@ -21,6 +21,18 @@ router.post("/login", function(req, res) {
   })
 });
 
+router.get("/ping", function(req, res) {
+  AuthService.checkToken(req.headers.token, function(err, token) {
+    if (err) {
+      res.status(401).send({error: err});
+    }
+    res.header({
+      "token": token.token
+    });
+      res.send({success: true});
+    });
+});
+
 router.get("/profile", function(req, res) {
   
   async.waterfall([

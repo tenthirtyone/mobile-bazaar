@@ -9,14 +9,14 @@ function checkToken(userToken, callback) {
   if (!token) {
     return callback({success: false, msg: 'Auth failed, missing valid token'});
   }
-  
+  console.log('userToken');
+  console.log(userToken);
   if (userToken === token) {
     token = jwt.sign({ username: config.USERNAME }, config.SECRET_SEED);
     return callback(null, {success: true, token: token});
   } else {
     return callback({success: false, msg: 'Auth failed, missing valid token'});
   }
-  return callback(null, token);
 }
 
 function getToken() {
