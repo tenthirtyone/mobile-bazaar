@@ -14,15 +14,12 @@
     };
     
     function getProfile() {
-      console.log('wts');
       $http.get(APIURL)
       .then(function(res) {
         console.log(res);      
-        
       }) 
       .catch(function(err) {
-        loginError = true;
-        loginErrorMsg = err.data.error.msg || 'Auth Failed';
+        console.log(err);
       })
     }
     

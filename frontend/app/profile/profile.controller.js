@@ -12,12 +12,11 @@
     vm.profile = getProfile;
     
     function getProfile() {
-      ProfileService.getProfile();
+      
       return {test: 'test'};
     };
         
      return vm;
-    
   }
   
 }());
