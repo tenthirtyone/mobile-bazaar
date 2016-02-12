@@ -27,9 +27,9 @@
     }
     
     function Login(credentials) {
-      $http.post(APIURL, 
-                 {username: credentials.username, 
-                  password: credentials.password})
+      $http.get(APIURL, 
+               {headers : {'Authorization': 'Basic ' + 
+                credentials.username + ':' + credentials.password}})
       .then(function(res) {
         $state.go('profile');
         loginError = false;

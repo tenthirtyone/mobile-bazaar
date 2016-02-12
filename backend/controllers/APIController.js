@@ -9,13 +9,13 @@ var ProfService = require("../services/ProfileService.js");
 
 module.exports = router;
 
-router.post("/login", function(req, res) {
+router.get("/login", function(req, res) {
   AuthService.login(req.headers.authorization, function(err, token, result) {
     if (err) {
       res.status(401).json({error: err});
     } else {
       res.header({
-        "token": token
+        "Authorization": token
       });
       res.send(result);  
     };
@@ -38,7 +38,7 @@ router.get("/ping", function(req, res) {
 router.get("/profile", function(req, res) {
   async.waterfall([
     function validateToken(callback) {
-      AuthService.checkToken(req.headers.token, function(err, token) {
+      AuthService.checkToken(req.headers.authorization, function(err, token) {
         if (err) {
           return callback({error: err});
         }
@@ -57,7 +57,7 @@ router.get("/profile", function(req, res) {
         res.status(404).json({error: err});
       } else {
         res.header({
-          "token": token.token
+          "Authorization": token.token
         });
         res.send({profile: profile.profile});        
       }

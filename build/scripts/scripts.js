@@ -83,12 +83,17 @@
     function tokenInterceptor($localStorage) {  
       return {
           request: function(config) {
-            config.headers['token'] = $localStorage.token || '';
-            return config;
+              if (!config.headers['Authorization']){
+                config.headers['Authorization'] = $localStorage.token || '';
+              }
+              return config;
+            
           },
           response: function(response) {
-            if(response.headers('token')) {
-              $localStorage.token = response.headers('token');
+            console.log('In Response');
+            console.log(response.headers('Authorization'));
+            if(response.headers('Authorization')) {
+              $localStorage.token = response.headers('Authorization');
             }
             return response;
           }
@@ -216,9 +221,9 @@
     }
     
     function Login(credentials) {
-      $http.post(APIURL, 
-                 {username: credentials.username, 
-                  password: credentials.password})
+      $http.get(APIURL, 
+               {headers : {'Authorization': 'Basic ' + 
+                credentials.username + ':' + credentials.password}})
       .then(function(res) {
         $state.go('profile');
         loginError = false;

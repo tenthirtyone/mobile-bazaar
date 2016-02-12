@@ -17,7 +17,7 @@ app.set('port', config.WEB_SERVER_PORT);
 
 var corsOptions = {
   origin: 'http://localhost',
-  exposedHeaders: 'token'
+  exposedHeaders: 'Authorization'
 };
 
 app.use(cors(corsOptions));
