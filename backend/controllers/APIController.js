@@ -35,7 +35,7 @@ router.get("/following", function(req, res) {
         res.header({
           "Authorization": token.token
         });
-        res.send({following: following});        
+        res.send({following: following.following});        
       }
   });
 });
