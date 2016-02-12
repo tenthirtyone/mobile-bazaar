@@ -7,6 +7,12 @@
 (function() {
   'use strict';
   
+  angular.module('mobile-bazaar.following', []);
+  
+}());
+(function() {
+  'use strict';
+  
   angular.module('mobile-bazaar.login', []);
   
 }());
@@ -20,6 +26,7 @@
   'use strict';
     
   angular.module('mobile-bazaar', [
+    'mobile-bazaar.following',
     'mobile-bazaar.profile',
     'mobile-bazaar.login',
     'ui.router',
@@ -128,6 +135,94 @@
 
   function DirectiveController() {
     var vm = this;
+    
+  }
+  
+}());
+(function() {
+  'use strict';
+  
+  angular.module('mobile-bazaar.following')
+  .controller('FollowingController', FollowingController);
+  
+  FollowingController.$inject = ['FollowingService'];
+  
+  function FollowingController(FollowingService) {
+    var vm = this;
+    vm.following = getFollowing;
+    
+    init();
+    
+    function init() {
+      FollowingService.setFollowing();
+    }
+    
+    function getFollowing() {
+      return FollowingService.getFollowing();
+    }
+  
+     return vm;
+  }
+  
+}());
+(function() {
+  'use strict';
+  angular
+    .module('mobile-bazaar.following')
+    .run(appRun);
+
+  appRun.$inject = ['routerHelper'];
+
+  function appRun(routerHelper) {
+    routerHelper.configureStates(getStates());
+  }
+
+  function getStates() {
+    return [
+      {
+        state: 'following',
+        config: {
+          url: '/following',
+          controller: 'FollowingController',
+          controllerAs: "following",
+          templateUrl: 'views/following.template.html'
+        }
+      }
+    ];
+  }
+}());
+(function() {
+  'use strict';
+  
+  angular.module('mobile-bazaar.following')
+  .service('FollowingService', FollowingService);
+  
+  FollowingService.$inject = ['$http'];
+  
+  function FollowingService($http) {
+    var APIURL = 'http://localhost:28469/api/following';
+    var following = {};
+    
+    
+    return {
+      getFollowing: getFollowing,
+      setFollowing: setFollowing  
+    };
+      
+    function getFollowing() {
+      console.log(following);
+      return following;
+    }    
+     
+    function setFollowing() {
+      $http.get(APIURL)
+      .then(function(res) {
+        following = res.data.following || {};
+      })
+      .catch(function(err){
+        console.log(err);
+      });
+    }
     
   }
   
@@ -250,10 +345,9 @@
     var vm = this;
     
     vm.guid = getGUID;
-    vm.website = getWebsite;
-    
     vm.profile = getProfile;
-    
+    vm.website = getWebsite;
+
     init();
     
     function init() {
