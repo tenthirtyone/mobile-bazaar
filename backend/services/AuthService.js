@@ -3,6 +3,7 @@
 var config = require("config");
 var logger = require("../common/logger");
 var jwt = require('jsonwebtoken');
+var atob = require('atob');
 var token;
 
 function checkToken(userToken, callback) {
@@ -22,7 +23,13 @@ function getToken() {
 }
 
 function login(authData, callback) {  
-  if (authData !== 'Basic ' + config.USERNAME + ':' + config.PASSWORD) {
+  var authParams = authData.split(' ');
+  
+  if (authParams[0] !== 'Basic') {
+    return callback({success: false, msg: 'Login failed, bad Auth type'})
+  }
+  
+  if (atob(authParams[1]) !== config.USERNAME + ':' + config.PASSWORD) {
     return callback({success: false, msg: 'Auth failed, credentials failed.'});
   } else {
     token = jwt.sign({ username: config.USERNAME }, config.SECRET_SEED);

@@ -13,7 +13,6 @@
                 config.headers.Authorization = $sessionStorage.token || '';
               }
               return config;
-            
           },
           response: function(response) {
             console.log('In Response');

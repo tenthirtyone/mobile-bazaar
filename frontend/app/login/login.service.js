@@ -29,7 +29,7 @@
     function Login(credentials) {
       $http.get(APIURL, 
                {headers : {'Authorization': 'Basic ' + 
-                credentials.username + ':' + credentials.password}})
+                btoa(credentials.username + ':' + credentials.password)}})
       .then(function(res) {
         $state.go('profile');
         loginError = false;

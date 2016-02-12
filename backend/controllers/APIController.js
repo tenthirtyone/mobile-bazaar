@@ -5,9 +5,39 @@ var config = require("config");
 var async = require("async");
 var router = express.Router();
 var AuthService = require("../services/AuthService.js");
+var FollowerService = require("../services/FollowerService.js");
 var ProfService = require("../services/ProfileService.js");
 
 module.exports = router;
+
+router.get("/followers", function(req, res) {
+  async.waterfall([
+    function validateToken(callback) {
+      AuthService.checkToken(req.headers.authorization, function(err, token) {
+        if (err) {
+          return callback({error: err});
+        }
+        return callback(null, token);
+      });
+    },
+    function(token, callback) {
+      FollowerService.getFollowers(function(err, followers){
+        if (err) {
+          return callback(err);
+        }  
+          return callback(null, token, followers);
+      });      
+    }], function(err, token, followers) {
+      if (err) {
+        res.status(404).json({error: err});
+      } else {
+        res.header({
+          "Authorization": token.token
+        });
+        res.send({followers: followers});        
+      }
+  });
+});
 
 router.get("/login", function(req, res) {
   AuthService.login(req.headers.authorization, function(err, token, result) {
