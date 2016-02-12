@@ -10,7 +10,7 @@ var ProfService = require("../services/ProfileService.js");
 module.exports = router;
 
 router.post("/login", function(req, res) {
-  AuthService.login(req.body, function(err, token, result) {
+  AuthService.login(req.headers.authorization, function(err, token, result) {
     if (err) {
       res.status(401).json({error: err});
     } else {

@@ -21,36 +21,13 @@ function getToken() {
   return token;
 }
 
-function login(userData, callback) {  
-  console.log(userData);
-  if(!userData) {
-    return callback({success: false, msg: 'Auth failed, missing username, password attributes.'});
-  }
-  
-  if (!userData.username) {
-    return callback({success: false, msg: 'Auth failed, missing username attribute.'});
-  };
-  
-  if (!userData.password) {
-    return callback({success: false, msg: 'Auth failed, missing password attribute.'});
-  };
-  
-  console.log(userData.username === config.USERNAME);
-  console.log(userData.password === config.PASSWORD);
-  
-  
-  if (userData.username === config.USERNAME && 
-      userData.password === config.PASSWORD) {
-    
+function login(authData, callback) {  
+  if (authData !== 'Basic ' + config.USERNAME + ':' + config.PASSWORD) {
+    return callback({success: false, msg: 'Auth failed, credentials failed.'});
+  } else {
     token = jwt.sign({ username: config.USERNAME }, config.SECRET_SEED);
-    
-    return callback(null, token, {
-                                  success: true, 
-                                  msg: 'Auth successful.',
-                                         });
+    return callback(null, token);
   }
-  
-  return callback({success: false, msg: 'Auth failed, credentials failed.'});  
 }
 
 module.exports = {
