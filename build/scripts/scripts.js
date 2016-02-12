@@ -1,13 +1,13 @@
 (function() {
   'use strict';
   
-  angular.module('mobile-bazaar.login', []);
+  angular.module('mobile-bazaar.directives', []);
   
 }());
 (function() {
   'use strict';
   
-  angular.module('mobile-bazaar.directives', []);
+  angular.module('mobile-bazaar.login', []);
   
 }());
 (function() {
@@ -87,7 +87,6 @@
                 config.headers.Authorization = $sessionStorage.token || '';
               }
               return config;
-            
           },
           response: function(response) {
             console.log('In Response');
@@ -104,6 +103,34 @@
     .config(['$httpProvider', function($httpProvider) {  
       $httpProvider.interceptors.push('tokenInterceptor');
   }]);
+}());
+(function() {
+  'use strict';
+  
+  angular
+    .module('mobile-bazaar.directives')
+    .directive('homeTile', homeTile);
+
+  function homeTile() {
+    var directive = {
+      restrict: 'EA',
+      templateUrl: 'views/homeTile.template.html',
+      scope: {
+          tiledata: '='
+      },
+      controller: DirectiveController,
+      controllerAs: 'vm',
+      //bindToController: true // Use to bind to outer scope
+    };
+
+    return directive;
+  }
+
+  function DirectiveController() {
+    var vm = this;
+    
+  }
+  
 }());
 (function() {
   'use strict';
@@ -195,7 +222,7 @@
     function Login(credentials) {
       $http.get(APIURL, 
                {headers : {'Authorization': 'Basic ' + 
-                credentials.username + ':' + credentials.password}})
+                btoa(credentials.username + ':' + credentials.password)}})
       .then(function(res) {
         $state.go('profile');
         loginError = false;
@@ -207,34 +234,6 @@
         loginErrorMsg = err.data.error.msg || 'Auth Failed';
       });
     }
-    
-  }
-  
-}());
-(function() {
-  'use strict';
-  
-  angular
-    .module('mobile-bazaar.directives')
-    .directive('homeTile', homeTile);
-
-  function homeTile() {
-    var directive = {
-      restrict: 'EA',
-      templateUrl: 'views/homeTile.template.html',
-      scope: {
-          tiledata: '='
-      },
-      controller: DirectiveController,
-      controllerAs: 'vm',
-      //bindToController: true // Use to bind to outer scope
-    };
-
-    return directive;
-  }
-
-  function DirectiveController() {
-    var vm = this;
     
   }
   
