@@ -13,11 +13,12 @@ router.post("/login", function(req, res) {
   AuthService.login(req.body, function(err, token, result) {
     if (err) {
       res.status(401).json({error: err});
-    }
-    res.header({
-      "token": token
-    });
-    res.send(result);
+    } else {
+      res.header({
+        "token": token
+      });
+      res.send(result);  
+    };
   })
 });
 
@@ -25,16 +26,16 @@ router.get("/ping", function(req, res) {
   AuthService.checkToken(req.headers.token, function(err, token) {
     if (err) {
       res.status(401).send({error: err});
+    } else {
+      res.header({
+        "token": token.token
+      });
+        res.send({success: true});  
     }
-    res.header({
-      "token": token.token
-    });
-      res.send({success: true});
-    });
+  });
 });
 
 router.get("/profile", function(req, res) {
-  
   async.waterfall([
     function validateToken(callback) {
       AuthService.checkToken(req.headers.token, function(err, token) {
@@ -54,11 +55,12 @@ router.get("/profile", function(req, res) {
     }], function(err, token, profile) {
       if (err) {
         res.status(404).json({error: err});
+      } else {
+        res.header({
+          "token": token.token
+        });
+        res.send({profile: profile.profile});        
       }
-    res.header({
-      "token": token.token
-    });
-    res.send({profile: profile.profile});
   });
 });
 
@@ -66,13 +68,12 @@ router.post("/test/token", function(req, res) {
   AuthService.checkToken(req.headers.token, function(err, token) {
     if (err) {
       res.status(404).json({error: err});
+    } else {
+      res.send(token);  
     }
-    res.send(token);
   })
 });
 
 router.post("/test", function(req, res) {
-
     res.send('test');
-
 });
