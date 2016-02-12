@@ -39,7 +39,7 @@
         //log
         loginError = true;
         loginErrorMsg = err.data.error.msg || 'Auth Failed';
-      })
+      });
     }
     
   }

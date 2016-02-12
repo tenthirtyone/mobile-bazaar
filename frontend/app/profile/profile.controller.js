@@ -14,7 +14,7 @@
     
     vm.profile = getProfile;
     
-    init()
+    init();
     
     function init() {
       ProfileService.setProfile();
@@ -22,15 +22,15 @@
     
     function getGUID() {
       return ProfileService.getGUID();
-    };
+    }
            
     function getProfile() {
       return ProfileService.getProfile();
-    };
+    }
             
     function getWebsite() {
       return ProfileService.getWebsite();
-    };
+    }
         
      return vm;
   }

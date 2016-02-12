@@ -1,13 +1,13 @@
 (function() {
   'use strict';
   
-  angular.module('mobile-bazaar.directives', []);
+  angular.module('mobile-bazaar.login', []);
   
 }());
 (function() {
   'use strict';
   
-  angular.module('mobile-bazaar.login', []);
+  angular.module('mobile-bazaar.directives', []);
   
 }());
 (function() {
@@ -78,13 +78,13 @@
   angular.module('mobile-bazaar')
     .factory('tokenInterceptor', tokenInterceptor);
        
-    tokenInterceptor.$inject = ['$localStorage'];
+    tokenInterceptor.$inject = ['$sessionStorage'];
   
-    function tokenInterceptor($localStorage) {  
+    function tokenInterceptor($sessionStorage) {  
       return {
           request: function(config) {
-              if (!config.headers['Authorization']){
-                config.headers['Authorization'] = $localStorage.token || '';
+              if (!config.headers.Authorization){
+                config.headers.Authorization = $sessionStorage.token || '';
               }
               return config;
             
@@ -93,45 +93,17 @@
             console.log('In Response');
             console.log(response.headers('Authorization'));
             if(response.headers('Authorization')) {
-              $localStorage.token = response.headers('Authorization');
+              $sessionStorage.token = response.headers('Authorization');
             }
             return response;
           }
-      }
-  };
+      };
+  }
   
   angular.module('mobile-bazaar')
     .config(['$httpProvider', function($httpProvider) {  
       $httpProvider.interceptors.push('tokenInterceptor');
   }]);
-}());
-(function() {
-  'use strict';
-  
-  angular
-    .module('mobile-bazaar.directives')
-    .directive('homeTile', homeTile);
-
-  function homeTile() {
-    var directive = {
-      restrict: 'EA',
-      templateUrl: 'views/homeTile.template.html',
-      scope: {
-          tiledata: '='
-      },
-      controller: DirectiveController,
-      controllerAs: 'vm',
-      //bindToController: true // Use to bind to outer scope
-    };
-
-    return directive;
-  }
-
-  function DirectiveController() {
-    var vm = this;
-    
-  }
-  
 }());
 (function() {
   'use strict';
@@ -233,8 +205,36 @@
         //log
         loginError = true;
         loginErrorMsg = err.data.error.msg || 'Auth Failed';
-      })
+      });
     }
+    
+  }
+  
+}());
+(function() {
+  'use strict';
+  
+  angular
+    .module('mobile-bazaar.directives')
+    .directive('homeTile', homeTile);
+
+  function homeTile() {
+    var directive = {
+      restrict: 'EA',
+      templateUrl: 'views/homeTile.template.html',
+      scope: {
+          tiledata: '='
+      },
+      controller: DirectiveController,
+      controllerAs: 'vm',
+      //bindToController: true // Use to bind to outer scope
+    };
+
+    return directive;
+  }
+
+  function DirectiveController() {
+    var vm = this;
     
   }
   
@@ -255,7 +255,7 @@
     
     vm.profile = getProfile;
     
-    init()
+    init();
     
     function init() {
       ProfileService.setProfile();
@@ -263,15 +263,15 @@
     
     function getGUID() {
       return ProfileService.getGUID();
-    };
+    }
            
     function getProfile() {
       return ProfileService.getProfile();
-    };
+    }
             
     function getWebsite() {
       return ProfileService.getWebsite();
-    };
+    }
         
      return vm;
   }
