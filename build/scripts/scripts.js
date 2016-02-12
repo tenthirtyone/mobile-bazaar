@@ -1,12 +1,6 @@
 (function() {
   'use strict';
   
-  angular.module('mobile-bazaar.directives', []);
-  
-}());
-(function() {
-  'use strict';
-  
   angular.module('mobile-bazaar.login', []);
   
 }());
@@ -14,6 +8,12 @@
   'use strict';
   
   angular.module('mobile-bazaar.profile', []);
+  
+}());
+(function() {
+  'use strict';
+  
+  angular.module('mobile-bazaar.directives', []);
   
 }());
 (function() {
@@ -103,34 +103,6 @@
     .config(['$httpProvider', function($httpProvider) {  
       $httpProvider.interceptors.push('tokenInterceptor');
   }]);
-}());
-(function() {
-  'use strict';
-  
-  angular
-    .module('mobile-bazaar.directives')
-    .directive('homeTile', homeTile);
-
-  function homeTile() {
-    var directive = {
-      restrict: 'EA',
-      templateUrl: 'views/homeTile.template.html',
-      scope: {
-          tiledata: '='
-      },
-      controller: DirectiveController,
-      controllerAs: 'vm',
-      //bindToController: true // Use to bind to outer scope
-    };
-
-    return directive;
-  }
-
-  function DirectiveController() {
-    var vm = this;
-    
-  }
-  
 }());
 (function() {
   'use strict';
@@ -344,6 +316,34 @@
         console.log(err);
       });
     }
+    
+  }
+  
+}());
+(function() {
+  'use strict';
+  
+  angular
+    .module('mobile-bazaar.directives')
+    .directive('homeTile', homeTile);
+
+  function homeTile() {
+    var directive = {
+      restrict: 'EA',
+      templateUrl: 'views/homeTile.template.html',
+      scope: {
+          tiledata: '='
+      },
+      controller: DirectiveController,
+      controllerAs: 'vm',
+      //bindToController: true // Use to bind to outer scope
+    };
+
+    return directive;
+  }
+
+  function DirectiveController() {
+    var vm = this;
     
   }
   
