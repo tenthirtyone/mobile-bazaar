@@ -10,10 +10,9 @@
     var vm = this;
     
     vm.guid = getGUID;
-    vm.website = getWebsite;
-    
     vm.profile = getProfile;
-    
+    vm.website = getWebsite;
+
     init();
     
     function init() {

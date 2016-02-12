@@ -12,19 +12,19 @@
     
     
     return {
-      getfollowing: getfollowing  
+      getFollowing: getFollowing,
+      setFollowing: setFollowing  
     };
       
     function getFollowing() {
+      console.log(following);
       return following;
     }    
-    
-    
-    function setProfile() {
+     
+    function setFollowing() {
       $http.get(APIURL)
       .then(function(res) {
-        console.log(res);  
-        profile = res.data.following || {};
+        following = res.data.following || {};
       })
       .catch(function(err){
         console.log(err);
