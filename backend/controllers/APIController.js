@@ -5,9 +5,40 @@ var config = require("config");
 var async = require("async");
 var router = express.Router();
 var AuthService = require("../services/AuthService.js");
+var FollowingService = require("../services/FollowingService.js");
 var ProfService = require("../services/ProfileService.js");
 
 module.exports = router;
+
+router.get("/following", function(req, res) {
+  console.log('woosh');
+  async.waterfall([
+    function validateToken(callback) {
+      AuthService.checkToken(req.headers.authorization, function(err, token) {
+        if (err) {
+          return callback({error: err});
+        }
+        return callback(null, token);
+      });
+    },
+    function(token, callback) {
+      FollowingService.getFollowing(function(err, following){
+        if (err) {
+          return callback(err);
+        }  
+          return callback(null, token, following);
+      });      
+    }], function(err, token, following) {
+      if (err) {
+        res.status(404).json({error: err});
+      } else {
+        res.header({
+          "Authorization": token.token
+        });
+        res.send({following: following});        
+      }
+  });
+});
 
 router.get("/login", function(req, res) {
   AuthService.login(req.headers.authorization, function(err, token, result) {
