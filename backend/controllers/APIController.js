@@ -1,5 +1,3 @@
-"use strict";
-
 var express = require("express");
 var config = require("config");
 var async = require("async");
