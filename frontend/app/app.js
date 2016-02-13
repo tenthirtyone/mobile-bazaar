@@ -2,6 +2,7 @@
   'use strict';
     
   angular.module('mobile-bazaar', [
+    'mobile-bazaar.following',
     'mobile-bazaar.profile',
     'mobile-bazaar.login',
     'ui.router',

@@ -1,13 +1,19 @@
 (function() {
   'use strict';
   
-  angular.module('mobile-bazaar.login', []);
+  angular.module('mobile-bazaar.directives', []);
   
 }());
 (function() {
   'use strict';
   
-  angular.module('mobile-bazaar.directives', []);
+  angular.module('mobile-bazaar.following', []);
+  
+}());
+(function() {
+  'use strict';
+  
+  angular.module('mobile-bazaar.login', []);
   
 }());
 (function() {
@@ -20,6 +26,7 @@
   'use strict';
     
   angular.module('mobile-bazaar', [
+    'mobile-bazaar.following',
     'mobile-bazaar.profile',
     'mobile-bazaar.login',
     'ui.router',
@@ -87,7 +94,6 @@
                 config.headers.Authorization = $sessionStorage.token || '';
               }
               return config;
-            
           },
           response: function(response) {
             console.log('In Response');
@@ -104,6 +110,122 @@
     .config(['$httpProvider', function($httpProvider) {  
       $httpProvider.interceptors.push('tokenInterceptor');
   }]);
+}());
+(function() {
+  'use strict';
+  
+  angular
+    .module('mobile-bazaar.directives')
+    .directive('homeTile', homeTile);
+
+  function homeTile() {
+    var directive = {
+      restrict: 'EA',
+      templateUrl: 'views/homeTile.template.html',
+      scope: {
+          tiledata: '='
+      },
+      controller: DirectiveController,
+      controllerAs: 'vm',
+      //bindToController: true // Use to bind to outer scope
+    };
+
+    return directive;
+  }
+
+  function DirectiveController() {
+    var vm = this;
+    
+  }
+  
+}());
+(function() {
+  'use strict';
+  
+  angular.module('mobile-bazaar.following')
+  .controller('FollowingController', FollowingController);
+  
+  FollowingController.$inject = ['FollowingService'];
+  
+  function FollowingController(FollowingService) {
+    var vm = this;
+    vm.following = getFollowing;
+    
+    init();
+    
+    function init() {
+      FollowingService.setFollowing();
+    }
+    
+    function getFollowing() {
+      return FollowingService.getFollowing();
+    }
+  
+     return vm;
+  }
+  
+}());
+(function() {
+  'use strict';
+  angular
+    .module('mobile-bazaar.following')
+    .run(appRun);
+
+  appRun.$inject = ['routerHelper'];
+
+  function appRun(routerHelper) {
+    routerHelper.configureStates(getStates());
+  }
+
+  function getStates() {
+    return [
+      {
+        state: 'following',
+        config: {
+          url: '/following',
+          controller: 'FollowingController',
+          controllerAs: "following",
+          templateUrl: 'views/following.template.html'
+        }
+      }
+    ];
+  }
+}());
+(function() {
+  'use strict';
+  
+  angular.module('mobile-bazaar.following')
+  .service('FollowingService', FollowingService);
+  
+  FollowingService.$inject = ['$http'];
+  
+  function FollowingService($http) {
+    var APIURL = 'http://localhost:28469/api/following';
+    var following = {};
+    
+    
+    return {
+      getFollowing: getFollowing,
+      setFollowing: setFollowing  
+    };
+      
+    function getFollowing() {
+      console.log(following);
+      return following;
+    }    
+     
+    function setFollowing() {
+      $http.get(APIURL)
+      .then(function(res) {
+        following = res.data.following || {};
+      })
+      .catch(function(err){
+        console.log(err);
+      });
+    }
+    
+  }
+  
 }());
 (function() {
   'use strict';
@@ -195,7 +317,7 @@
     function Login(credentials) {
       $http.get(APIURL, 
                {headers : {'Authorization': 'Basic ' + 
-                credentials.username + ':' + credentials.password}})
+                btoa(credentials.username + ':' + credentials.password)}})
       .then(function(res) {
         $state.go('profile');
         loginError = false;
@@ -214,34 +336,6 @@
 (function() {
   'use strict';
   
-  angular
-    .module('mobile-bazaar.directives')
-    .directive('homeTile', homeTile);
-
-  function homeTile() {
-    var directive = {
-      restrict: 'EA',
-      templateUrl: 'views/homeTile.template.html',
-      scope: {
-          tiledata: '='
-      },
-      controller: DirectiveController,
-      controllerAs: 'vm',
-      //bindToController: true // Use to bind to outer scope
-    };
-
-    return directive;
-  }
-
-  function DirectiveController() {
-    var vm = this;
-    
-  }
-  
-}());
-(function() {
-  'use strict';
-  
   angular.module('mobile-bazaar.profile')
   .controller('ProfileController', ProfileController);
   
@@ -251,10 +345,9 @@
     var vm = this;
     
     vm.guid = getGUID;
-    vm.website = getWebsite;
-    
     vm.profile = getProfile;
-    
+    vm.website = getWebsite;
+
     init();
     
     function init() {
