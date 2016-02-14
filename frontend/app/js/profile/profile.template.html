@@ -1,7 +1,13 @@
-<div class="container">
+<div class="page-wrapper">
+  <img class="profile-image" src="/img/demo-store-image.jpg">
+  <div class="container">
+  test
   <h2>Profile</h2>
-  {{profile.guid()}}
-  {{profile.website()}}
+      <form action="http://localhost:18469/api/v1/get_image" method="get" enctype="multipart/form-data" target="_blank">
+    `<input type="text" name="hash" placeholder="Image hash" required />
+        <input type="submit" value="View Image" />`
+    </form>
   
   <div ng-repeat="(key, value) in profile.profile()">{{key}} : {{value}}</div>
+  </div>
 </div>

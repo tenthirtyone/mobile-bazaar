@@ -42,7 +42,7 @@ gulp.task('default', ['move', 'scss', 'scripts', 'views', 'vendor', 'images'], f
 });
 
 gulp.task('images', ['clean'], function() {
-  return gulp.src('app/img/*.png')
+  return gulp.src(['app/img/*.png', 'app/img/*.jpg'])
     .pipe(gulp.dest(buildDir + 'img/'))
 });
 
