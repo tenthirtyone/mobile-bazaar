@@ -36,10 +36,15 @@ gulp.task('clean', function(){
   return del(buildDir, {force: true});
 });
 
-gulp.task('default', ['move', 'scss', 'scripts', 'views', 'vendor'], function(){
+gulp.task('default', ['move', 'scss', 'scripts', 'views', 'vendor', 'images'], function(){
   gulp.src('dist/index.html')
     .pipe(open({app:browser}));
-})
+});
+
+gulp.task('images', ['clean'], function() {
+  return gulp.src('app/img/*.png')
+    .pipe(gulp.dest(buildDir + 'img/'))
+});
 
 gulp.task('lint', function() {
   return gulp.src('app/**/*.js')

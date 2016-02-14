@@ -1,3 +1,5 @@
+$brand_color: #327eb8;
+
 html {
   height: 100%;
 }
@@ -5,4 +7,16 @@ html {
 .page-wrapper {
   height: 100%;
   width: 100%;
+}
+
+.btn-primary {
+  background-color: $brand_color;
+}
+
+.btn-primary:hover {
+  background-color: darken($brand_color, 20%);
+}
+
+.btn-primary:active {
+  background-color: darken($brand_color, 20%);
 }

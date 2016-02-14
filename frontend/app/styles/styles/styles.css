@@ -4,3 +4,12 @@ html {
 .page-wrapper {
   height: 100%;
   width: 100%; }
+
+.btn-primary {
+  background-color: #327eb8; }
+
+.btn-primary:hover {
+  background-color: #1c4768; }
+
+.btn-primary:active {
+  background-color: #1c4768; }

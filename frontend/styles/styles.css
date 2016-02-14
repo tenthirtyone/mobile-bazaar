@@ -20,15 +20,6 @@ html {
   height: 100%;
   width: 100%; }
 
-.btn-primary {
-  background-color: #327eb8; }
-
-.btn-primary:hover {
-  background-color: #1c4768; }
-
-.btn-primary:active {
-  background-color: #1c4768; }
-
 
 .login-form {
   border: 1px solid #efefef;
@@ -41,19 +32,3 @@ html {
   margin-top: 5px;
   padding-top: 5px; }
 
-
-.navbar-brand-img {
-  margin-top: 5px;
-  margin-right: 5px;
-  margin-left: 5px; }
-
-.navbar-mobile-bazaar {
-  background-color: #327eb8; }
-
-.navbar-brand {
-  color: #efefef;
-  font-weight: 600; }
-
-.navbar-brand:hover {
-  color: #efefef;
-  font-weight: 600; }

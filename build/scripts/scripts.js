@@ -1,12 +1,6 @@
 (function() {
   'use strict';
   
-  angular.module('mobile-bazaar.directives', []);
-  
-}());
-(function() {
-  'use strict';
-  
   angular.module('mobile-bazaar.followers', []);
   
 }());
@@ -26,6 +20,12 @@
   'use strict';
   
   angular.module('mobile-bazaar.profile', []);
+  
+}());
+(function() {
+  'use strict';
+  
+  angular.module('mobile-bazaar.directives', []);
   
 }());
 (function() {
@@ -118,33 +118,6 @@
     .config(['$httpProvider', function($httpProvider) {  
       $httpProvider.interceptors.push('tokenInterceptor');
   }]);
-}());
-(function() {
-  'use strict';
-  
-  angular
-    .module('mobile-bazaar.directives')
-    .directive('obNavbar', obNavbar);
-
-  function obNavbar() {
-    var directive = {
-      restrict: 'EA',
-      templateUrl: 'views/obNavbar.template.html',
-      scope: {
-          navbardata: '='
-      },
-      controller: DirectiveController,
-      controllerAs: 'vm'
-    };
-
-    return directive;
-  }
-
-  function DirectiveController() {
-    var vm = this;
-    
-  }
-  
 }());
 (function() {
   'use strict';
@@ -533,6 +506,33 @@
         console.log(err);
       });
     }
+    
+  }
+  
+}());
+(function() {
+  'use strict';
+  
+  angular
+    .module('mobile-bazaar.directives')
+    .directive('obNavbar', obNavbar);
+
+  function obNavbar() {
+    var directive = {
+      restrict: 'EA',
+      templateUrl: 'views/obNavbar.template.html',
+      scope: {
+          navbardata: '='
+      },
+      controller: DirectiveController,
+      controllerAs: 'vm'
+    };
+
+    return directive;
+  }
+
+  function DirectiveController() {
+    var vm = this;
     
   }
   
