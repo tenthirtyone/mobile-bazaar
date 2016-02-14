@@ -5,21 +5,13 @@ var config = require("config");
 var async = require("async");
 var router = express.Router();
 var AuthService = require("../services/AuthService.js");
-<<<<<<< HEAD
 var FollowingService = require("../services/FollowingService.js");
-=======
-var FollowerService = require("../services/FollowerService.js");
->>>>>>> BE wired, I have no followers on the test account
 var ProfService = require("../services/ProfileService.js");
 
 module.exports = router;
 
-<<<<<<< HEAD
 router.get("/following", function(req, res) {
   console.log('woosh');
-=======
-router.get("/followers", function(req, res) {
->>>>>>> BE wired, I have no followers on the test account
   async.waterfall([
     function validateToken(callback) {
       AuthService.checkToken(req.headers.authorization, function(err, token) {
@@ -30,7 +22,6 @@ router.get("/followers", function(req, res) {
       });
     },
     function(token, callback) {
-<<<<<<< HEAD
       FollowingService.getFollowing(function(err, following){
         if (err) {
           return callback(err);
@@ -38,26 +29,13 @@ router.get("/followers", function(req, res) {
           return callback(null, token, following);
       });      
     }], function(err, token, following) {
-=======
-      FollowerService.getFollowers(function(err, followers){
-        if (err) {
-          return callback(err);
-        }  
-          return callback(null, token, followers);
-      });      
-    }], function(err, token, followers) {
->>>>>>> BE wired, I have no followers on the test account
       if (err) {
         res.status(404).json({error: err});
       } else {
         res.header({
           "Authorization": token.token
         });
-<<<<<<< HEAD
         res.send({following: following.following});        
-=======
-        res.send({followers: followers});        
->>>>>>> BE wired, I have no followers on the test account
       }
   });
 });

@@ -7,6 +7,12 @@
 (function() {
   'use strict';
   
+  angular.module('mobile-bazaar.followers', []);
+  
+}());
+(function() {
+  'use strict';
+  
   angular.module('mobile-bazaar.following', []);
   
 }());
@@ -135,6 +141,94 @@
 
   function DirectiveController() {
     var vm = this;
+    
+  }
+  
+}());
+(function() {
+  'use strict';
+  
+  angular.module('mobile-bazaar.followers')
+  .controller('FollowersController', FollowersController);
+  
+  FollowersController.$inject = ['FollowersService'];
+  
+  function FollowersController(FollowerService) {
+    var vm = this;
+    vm.followers = getFollowers;
+    
+    init();
+    
+    function init() {
+      FollowersService.setFollowers();
+    }
+    
+    function getFollowers() {
+      return FollowersService.getFollowers();
+    }
+  
+     return vm;
+  }
+  
+}());
+(function() {
+  'use strict';
+  angular
+    .module('mobile-bazaar.followers')
+    .run(appRun);
+
+  appRun.$inject = ['routerHelper'];
+
+  function appRun(routerHelper) {
+    routerHelper.configureStates(getStates());
+  }
+
+  function getStates() {
+    return [
+      {
+        state: 'followers',
+        config: {
+          url: '/followers',
+          controller: 'FollowersController',
+          controllerAs: "followers",
+          templateUrl: 'views/followers.template.html'
+        }
+      }
+    ];
+  }
+}());
+(function() {
+  'use strict';
+  
+  angular.module('mobile-bazaar.followers')
+  .service('FollowersService', FollowersService);
+  
+  FollowersService.$inject = ['$http'];
+  
+  function FollowersService($http) {
+    var APIURL = 'http://localhost:28469/api/followers';
+    var followers = {};
+    
+    
+    return {
+      getFollowers: getFollowers,
+      setFollowers: setFollowers  
+    };
+      
+    function getFollowers() {
+      console.log(following);
+      return following;
+    }    
+     
+    function setFollowers() {
+      $http.get(APIURL)
+      .then(function(res) {
+        followers = res.data.followers || {};
+      })
+      .catch(function(err){
+        console.log(err);
+      });
+    }
     
   }
   
