@@ -44,7 +44,7 @@ function getOBCookie(callback) {
   request
   .post(loginURL)
   .type('form')
-  .send({username: 'test', password: 'test'})
+  .send({username: config.OBUSERNAME, password: config.OBPASSWORD})
   .end(function(err, res){
     if (err) {
       console.log('error', err);

@@ -4,5 +4,7 @@
   "RUN_MODE": "debug",
   "SECRET_SEED": "sneakysquirrels--replaceme--",
   "USERNAME": "test",
-  "PASSWORD": "test"
+  "PASSWORD": "test",
+  "OBUSERNAME": "test",
+  "OBPASSWORD": "test"
 }
