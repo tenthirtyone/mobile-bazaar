@@ -13,10 +13,11 @@ body {
   width: 100%; }
 
 .btn-primary {
-  background-color: #327eb8; }
+  background-color: #215175;
+  border-color: #215175; }
 
 .btn-primary:hover {
-  background-color: #1c4768; }
+  background-color: #3788c5; }
 
 .btn-primary:active {
-  background-color: #1c4768; }
+  background-color: #3788c5; }

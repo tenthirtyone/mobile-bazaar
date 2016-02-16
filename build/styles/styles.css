@@ -28,17 +28,19 @@ body {
   width: 100%; }
 
 .btn-primary {
-  background-color: #327eb8; }
+  background-color: #215175;
+  border-color: #215175; }
 
 .btn-primary:hover {
-  background-color: #1c4768; }
+  background-color: #3788c5; }
 
 .btn-primary:active {
-  background-color: #1c4768; }
+  background-color: #3788c5; }
 
 
 .login-form {
   border: 1px solid #efefef;
+  border-radius: 2px;
   padding: 10px;
   margin-top: 15px;
   margin-bottom: 15px; }
@@ -55,6 +57,11 @@ body {
   margin-top: 5px;
   padding-top: 5px; }
 
+.no-padding {
+  padding: 0px 0px 0px 0px; }
+
+.profile-image {
+  max-width: 100%; }
 
 .navbar {
   margin-bottom: 2px;
