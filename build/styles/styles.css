@@ -16,6 +16,9 @@
 html {
   height: 100%; }
 
+body {
+  background-color: rgba(0, 0, 0, 0.05); }
+
 .page-wrapper {
   height: 100%;
   width: 100%; }
@@ -41,10 +44,6 @@ html {
   margin-top: 5px;
   padding-top: 5px; }
 
-.profile-image {
-  height: auto;
-  width: 150%;
-  max-width: 950px; }
 
 .navbar {
   margin-bottom: 2px;

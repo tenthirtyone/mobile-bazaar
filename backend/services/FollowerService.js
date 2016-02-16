@@ -4,12 +4,14 @@ var request = require('superagent');
 var config = require("config");
 var logger = require("../common/logger");
 var jwt = require('jsonwebtoken');
+var AuthService = require('./AuthService');
 var followerURL = config.OB_URL + '/get_followers';
 
 function getFollowers(callback) {  
   console.log(followerURL);
   request
   .get(followerURL)
+  .set('Cookie', AuthService.getCookie())
   .end(function(err, res){
     if (err) {
       return callback({success: false, msg: 'getFollowers failed, check OB Backend'});

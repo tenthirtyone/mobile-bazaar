@@ -19,7 +19,7 @@ function init() {
       console.log(err);
     }
     cookie = obCookie["set-cookie"][0];
-    logger.debug('Cookie Stored');
+    logger.debug('Cookie Stored', cookie);
   });
 }
 
@@ -33,6 +33,10 @@ function checkToken(userToken, callback) {
   } else {
     return callback({success: false, msg: 'Auth failed, missing valid token'});
   }
+}
+
+function getCookie() {
+  return cookie;
 }
 
 function getOBCookie(callback) {
@@ -70,6 +74,7 @@ function login(authData, callback) {
 }
 
 module.exports = {
+  getCookie: getCookie,
   getToken: getToken,
   login: logger.wrapFunction(login),
   checkToken: logger.wrapFunction(checkToken)
