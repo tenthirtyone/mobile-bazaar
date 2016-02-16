@@ -4,22 +4,23 @@ var request = require('superagent');
 var config = require("config");
 var logger = require("../common/logger");
 var jwt = require('jsonwebtoken');
-var profileURL = config.OB_URL + '/profile';
 var AuthService = require('./AuthService');
+var followerURL = config.OB_URL + '/get_followers';
 
-function getProfile(callback) {  
-  console.log(AuthService.getCookie());
+function getFollowers(callback) {  
+  console.log(followerURL);
   request
-  .get(profileURL)
+  .get(followerURL)
   .set('Cookie', AuthService.getCookie())
   .end(function(err, res){
     if (err) {
-      return callback({success: false, msg: 'getProfile failed, check OB Backend'});
+      return callback({success: false, msg: 'getFollowers failed, check OB Backend'});
     }
+    console.log(res);
     return callback(null, res.body);
   });
 }
 
 module.exports = {
-  getProfile: logger.wrapFunction(getProfile)
+  getFollowers: logger.wrapFunction(getFollowers)
 };

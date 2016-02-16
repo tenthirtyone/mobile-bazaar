@@ -1,7 +1,7 @@
 (function() {
   'use strict';
   
-  angular.module('mobile-bazaar.directives', []);
+  angular.module('mobile-bazaar.followers', []);
   
 }());
 (function() {
@@ -24,8 +24,16 @@
 }());
 (function() {
   'use strict';
+  
+  angular.module('mobile-bazaar.directives', []);
+  
+}());
+(function() {
+  'use strict';
     
   angular.module('mobile-bazaar', [
+    'mobile-bazaar.directives',
+    'mobile-bazaar.followers',
     'mobile-bazaar.following',
     'mobile-bazaar.profile',
     'mobile-bazaar.login',
@@ -114,27 +122,87 @@
 (function() {
   'use strict';
   
+  angular.module('mobile-bazaar.followers')
+  .controller('FollowersController', FollowersController);
+  
+  FollowersController.$inject = ['FollowersService'];
+  
+  function FollowersController(FollowerService) {
+    var vm = this;
+    vm.followers = getFollowers;
+    
+    init();
+    
+    function init() {
+      FollowersService.setFollowers();
+    }
+    
+    function getFollowers() {
+      return FollowersService.getFollowers();
+    }
+  
+     return vm;
+  }
+  
+}());
+(function() {
+  'use strict';
   angular
-    .module('mobile-bazaar.directives')
-    .directive('homeTile', homeTile);
+    .module('mobile-bazaar.followers')
+    .run(appRun);
 
-  function homeTile() {
-    var directive = {
-      restrict: 'EA',
-      templateUrl: 'views/homeTile.template.html',
-      scope: {
-          tiledata: '='
-      },
-      controller: DirectiveController,
-      controllerAs: 'vm',
-      //bindToController: true // Use to bind to outer scope
-    };
+  appRun.$inject = ['routerHelper'];
 
-    return directive;
+  function appRun(routerHelper) {
+    routerHelper.configureStates(getStates());
   }
 
-  function DirectiveController() {
-    var vm = this;
+  function getStates() {
+    return [
+      {
+        state: 'followers',
+        config: {
+          url: '/followers',
+          controller: 'FollowersController',
+          controllerAs: "followers",
+          templateUrl: 'views/followers.template.html'
+        }
+      }
+    ];
+  }
+}());
+(function() {
+  'use strict';
+  
+  angular.module('mobile-bazaar.followers')
+  .service('FollowersService', FollowersService);
+  
+  FollowersService.$inject = ['$http'];
+  
+  function FollowersService($http) {
+    var APIURL = 'http://localhost:28469/api/followers';
+    var followers = {};
+    
+    
+    return {
+      getFollowers: getFollowers,
+      setFollowers: setFollowers  
+    };
+      
+    function getFollowers() {
+      console.log(following);
+      return following;
+    }    
+     
+    function setFollowers() {
+      $http.get(APIURL)
+      .then(function(res) {
+        followers = res.data.followers || {};
+      })
+      .catch(function(err){
+        console.log(err);
+      });
+    }
     
   }
   
@@ -438,6 +506,33 @@
         console.log(err);
       });
     }
+    
+  }
+  
+}());
+(function() {
+  'use strict';
+  
+  angular
+    .module('mobile-bazaar.directives')
+    .directive('obNavbar', obNavbar);
+
+  function obNavbar() {
+    var directive = {
+      restrict: 'EA',
+      templateUrl: 'views/obNavbar.template.html',
+      scope: {
+          navbardata: '='
+      },
+      controller: DirectiveController,
+      controllerAs: 'vm'
+    };
+
+    return directive;
+  }
+
+  function DirectiveController() {
+    var vm = this;
     
   }
   

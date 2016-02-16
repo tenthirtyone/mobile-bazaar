@@ -3,18 +3,17 @@
   
   angular
     .module('mobile-bazaar.directives')
-    .directive('homeTile', homeTile);
+    .directive('obNavbar', obNavbar);
 
-  function homeTile() {
+  function obNavbar() {
     var directive = {
       restrict: 'EA',
-      templateUrl: 'views/homeTile.template.html',
+      templateUrl: 'views/obNavbar.template.html',
       scope: {
-          tiledata: '='
+          navbardata: '='
       },
       controller: DirectiveController,
-      controllerAs: 'vm',
-      //bindToController: true // Use to bind to outer scope
+      controllerAs: 'vm'
     };
 
     return directive;
