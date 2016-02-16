@@ -4,7 +4,8 @@
 .login-form {
   border: 1px solid #efefef;
   padding: 10px;
-  margin: 15px; }
+  margin-top: 15px;
+  margin-bottom: 15px; }
 
 .login-input {
   width: 80%;
@@ -15,6 +16,64 @@
 html {
   height: 100%; }
 
+body {
+  background-color: #063753;
+  margin-top: 50px;
+  color: white;
+  font-size: 16px;
+  font-weight: 500; }
+
 .page-wrapper {
   height: 100%;
   width: 100%; }
+
+.btn-primary {
+  background-color: #327eb8; }
+
+.btn-primary:hover {
+  background-color: #1c4768; }
+
+.btn-primary:active {
+  background-color: #1c4768; }
+
+
+.login-form {
+  border: 1px solid #efefef;
+  padding: 10px;
+  margin-top: 15px;
+  margin-bottom: 15px; }
+
+.login-image {
+  display: block;
+  max-width: 150px;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto; }
+
+.login-input {
+  width: 80%;
+  margin-top: 5px;
+  padding-top: 5px; }
+
+
+.navbar {
+  margin-bottom: 2px;
+  -webkit-box-shadow: 0 2px 1px #1c4768;
+  -moz-box-shadow: 0 2px 1px #1c4768;
+  box-shadow: 0 2px 1px #1c4768; }
+
+.navbar-brand-img {
+  margin-top: 5px;
+  margin-right: 5px;
+  margin-left: 5px; }
+
+.navbar-brand {
+  color: #efefef;
+  font-weight: 600; }
+
+.navbar-brand:hover {
+  color: #efefef;
+  font-weight: 600; }
+
+.navbar-mobile-bazaar {
+  background-color: #215175; }

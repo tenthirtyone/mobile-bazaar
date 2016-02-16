@@ -1,6 +1,22 @@
 html {
   height: 100%; }
 
+body {
+  background-color: #063753;
+  margin-top: 50px;
+  color: white;
+  font-size: 16px;
+  font-weight: 500; }
+
 .page-wrapper {
   height: 100%;
   width: 100%; }
+
+.btn-primary {
+  background-color: #327eb8; }
+
+.btn-primary:hover {
+  background-color: #1c4768; }
+
+.btn-primary:active {
+  background-color: #1c4768; }

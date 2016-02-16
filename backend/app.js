@@ -11,8 +11,8 @@ var Path = require('path');
 var bodyParser = require('body-parser');
 var logger = require('./common/logger');
 var createDomain = require('domain').create;
-
 var app = express();
+
 app.set('port', config.WEB_SERVER_PORT);
 
 var corsOptions = {

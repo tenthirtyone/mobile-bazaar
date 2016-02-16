@@ -4,7 +4,24 @@ var config = require("config");
 var logger = require("../common/logger");
 var jwt = require('jsonwebtoken');
 var atob = require('atob');
+var request = require('superagent');
+var loginURL = config.OB_URL + '/login';
 var token;
+var cookie;
+
+init();
+
+function init() {
+  logger.debug('Requesting Open Bazaar Cookie');
+  getOBCookie(function(err, obCookie){
+    if (err) {
+      logger.logFullError(err);
+      console.log(err);
+    }
+    cookie = obCookie["set-cookie"][0];
+    logger.debug('Cookie Stored', cookie);
+  });
+}
 
 function checkToken(userToken, callback) {
   if (!token) {
@@ -16,6 +33,25 @@ function checkToken(userToken, callback) {
   } else {
     return callback({success: false, msg: 'Auth failed, missing valid token'});
   }
+}
+
+function getCookie() {
+  return cookie;
+}
+
+function getOBCookie(callback) {
+  console.log('Getting Open Bazaar Cookie');
+  request
+  .post(loginURL)
+  .type('form')
+  .send({username: 'test', password: 'test'})
+  .end(function(err, res){
+    if (err) {
+      console.log('error', err);
+      return callback({success: false, msg: 'getOBCookie failed, check OB Backend'});
+    }
+    return callback(null, res.headers);
+  });
 }
 
 function getToken() {
@@ -38,6 +74,7 @@ function login(authData, callback) {
 }
 
 module.exports = {
+  getCookie: getCookie,
   getToken: getToken,
   login: logger.wrapFunction(login),
   checkToken: logger.wrapFunction(checkToken)
