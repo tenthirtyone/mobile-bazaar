@@ -2,7 +2,8 @@ html {
   height: 100%; }
 
 body {
-  background-color: rgba(0, 0, 0, 0.05); }
+  background-color: rgba(0, 0, 0, 0.05);
+  margin-top: 50px; }
 
 .page-wrapper {
   height: 100%;

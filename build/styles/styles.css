@@ -17,7 +17,8 @@ html {
   height: 100%; }
 
 body {
-  background-color: rgba(0, 0, 0, 0.05); }
+  background-color: rgba(0, 0, 0, 0.05);
+  margin-top: 50px; }
 
 .page-wrapper {
   height: 100%;
@@ -39,6 +40,13 @@ body {
   margin-top: 15px;
   margin-bottom: 15px; }
 
+.login-image {
+  display: block;
+  max-width: 150px;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto; }
+
 .login-input {
   width: 80%;
   margin-top: 5px;
@@ -53,8 +61,8 @@ body {
 
 .navbar-brand-img {
   margin-top: 5px;
-  margin-right: 5px;
-  margin-left: 5px; }
+  margin-right: auto;
+  margin-left: auto; }
 
 .navbar-brand {
   color: #efefef;
