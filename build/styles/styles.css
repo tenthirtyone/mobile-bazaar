@@ -17,8 +17,11 @@ html {
   height: 100%; }
 
 body {
-  background-color: rgba(0, 0, 0, 0.05);
-  margin-top: 50px; }
+  background-color: #063753;
+  margin-top: 50px;
+  color: white;
+  font-size: 16px;
+  font-weight: 500; }
 
 .page-wrapper {
   height: 100%;
@@ -61,8 +64,8 @@ body {
 
 .navbar-brand-img {
   margin-top: 5px;
-  margin-right: auto;
-  margin-left: auto; }
+  margin-right: 5px;
+  margin-left: 5px; }
 
 .navbar-brand {
   color: #efefef;
@@ -73,4 +76,4 @@ body {
   font-weight: 600; }
 
 .navbar-mobile-bazaar {
-  background-color: #327eb8; }
+  background-color: #215175; }
