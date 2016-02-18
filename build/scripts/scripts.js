@@ -1,18 +1,6 @@
 (function() {
   'use strict';
   
-  angular.module('mobile-bazaar.followers', []);
-  
-}());
-(function() {
-  'use strict';
-  
-  angular.module('mobile-bazaar.following', []);
-  
-}());
-(function() {
-  'use strict';
-  
   angular.module('mobile-bazaar.login', []);
   
 }());
@@ -30,6 +18,18 @@
 }());
 (function() {
   'use strict';
+  
+  angular.module('mobile-bazaar.followers', []);
+  
+}());
+(function() {
+  'use strict';
+  
+  angular.module('mobile-bazaar.following', []);
+  
+}());
+(function() {
+  'use strict';
     
   angular.module('mobile-bazaar', [
     'mobile-bazaar.directives',
@@ -37,17 +37,22 @@
     'mobile-bazaar.following',
     'mobile-bazaar.profile',
     'mobile-bazaar.login',
+    'ngMaterial',
     'ui.router',
     'ngStorage'
   ]);
    
   // Response Headers
   angular.module('mobile-bazaar')
-  .config(['$httpProvider', function($httpProvider) {
-      $httpProvider.defaults.headers.common = {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-      };     
+  .config(['$httpProvider', '$mdThemingProvider', function($httpProvider, $mdThemingProvider) {
+    $httpProvider.defaults.headers.common = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    };     
+    
+    $mdThemingProvider.theme('default')
+    .dark();
+    
   }]);    
 }());
 (function() {
@@ -118,182 +123,6 @@
     .config(['$httpProvider', function($httpProvider) {  
       $httpProvider.interceptors.push('tokenInterceptor');
   }]);
-}());
-(function() {
-  'use strict';
-  
-  angular.module('mobile-bazaar.followers')
-  .controller('FollowersController', FollowersController);
-  
-  FollowersController.$inject = ['FollowersService'];
-  
-  function FollowersController(FollowerService) {
-    var vm = this;
-    vm.followers = getFollowers;
-    
-    init();
-    
-    function init() {
-      FollowersService.setFollowers();
-    }
-    
-    function getFollowers() {
-      return FollowersService.getFollowers();
-    }
-  
-     return vm;
-  }
-  
-}());
-(function() {
-  'use strict';
-  angular
-    .module('mobile-bazaar.followers')
-    .run(appRun);
-
-  appRun.$inject = ['routerHelper'];
-
-  function appRun(routerHelper) {
-    routerHelper.configureStates(getStates());
-  }
-
-  function getStates() {
-    return [
-      {
-        state: 'followers',
-        config: {
-          url: '/followers',
-          controller: 'FollowersController',
-          controllerAs: "followers",
-          templateUrl: 'views/followers.template.html'
-        }
-      }
-    ];
-  }
-}());
-(function() {
-  'use strict';
-  
-  angular.module('mobile-bazaar.followers')
-  .service('FollowersService', FollowersService);
-  
-  FollowersService.$inject = ['$http'];
-  
-  function FollowersService($http) {
-    var APIURL = 'http://localhost:28469/api/followers';
-    var followers = {};
-    
-    
-    return {
-      getFollowers: getFollowers,
-      setFollowers: setFollowers  
-    };
-      
-    function getFollowers() {
-      console.log(following);
-      return following;
-    }    
-     
-    function setFollowers() {
-      $http.get(APIURL)
-      .then(function(res) {
-        followers = res.data.followers || {};
-      })
-      .catch(function(err){
-        console.log(err);
-      });
-    }
-    
-  }
-  
-}());
-(function() {
-  'use strict';
-  
-  angular.module('mobile-bazaar.following')
-  .controller('FollowingController', FollowingController);
-  
-  FollowingController.$inject = ['FollowingService'];
-  
-  function FollowingController(FollowingService) {
-    var vm = this;
-    vm.following = getFollowing;
-    
-    init();
-    
-    function init() {
-      FollowingService.setFollowing();
-    }
-    
-    function getFollowing() {
-      return FollowingService.getFollowing();
-    }
-  
-     return vm;
-  }
-  
-}());
-(function() {
-  'use strict';
-  angular
-    .module('mobile-bazaar.following')
-    .run(appRun);
-
-  appRun.$inject = ['routerHelper'];
-
-  function appRun(routerHelper) {
-    routerHelper.configureStates(getStates());
-  }
-
-  function getStates() {
-    return [
-      {
-        state: 'following',
-        config: {
-          url: '/following',
-          controller: 'FollowingController',
-          controllerAs: "following",
-          templateUrl: 'views/following.template.html'
-        }
-      }
-    ];
-  }
-}());
-(function() {
-  'use strict';
-  
-  angular.module('mobile-bazaar.following')
-  .service('FollowingService', FollowingService);
-  
-  FollowingService.$inject = ['$http'];
-  
-  function FollowingService($http) {
-    var APIURL = 'http://localhost:28469/api/following';
-    var following = {};
-    
-    
-    return {
-      getFollowing: getFollowing,
-      setFollowing: setFollowing  
-    };
-      
-    function getFollowing() {
-      console.log(following);
-      return following;
-    }    
-     
-    function setFollowing() {
-      $http.get(APIURL)
-      .then(function(res) {
-        following = res.data.following || {};
-      })
-      .catch(function(err){
-        console.log(err);
-      });
-    }
-    
-  }
-  
 }());
 (function() {
   'use strict';
@@ -533,6 +362,182 @@
 
   function DirectiveController() {
     var vm = this;
+    
+  }
+  
+}());
+(function() {
+  'use strict';
+  
+  angular.module('mobile-bazaar.followers')
+  .controller('FollowersController', FollowersController);
+  
+  FollowersController.$inject = ['FollowersService'];
+  
+  function FollowersController(FollowerService) {
+    var vm = this;
+    vm.followers = getFollowers;
+    
+    init();
+    
+    function init() {
+      FollowersService.setFollowers();
+    }
+    
+    function getFollowers() {
+      return FollowersService.getFollowers();
+    }
+  
+     return vm;
+  }
+  
+}());
+(function() {
+  'use strict';
+  angular
+    .module('mobile-bazaar.followers')
+    .run(appRun);
+
+  appRun.$inject = ['routerHelper'];
+
+  function appRun(routerHelper) {
+    routerHelper.configureStates(getStates());
+  }
+
+  function getStates() {
+    return [
+      {
+        state: 'followers',
+        config: {
+          url: '/followers',
+          controller: 'FollowersController',
+          controllerAs: "followers",
+          templateUrl: 'views/followers.template.html'
+        }
+      }
+    ];
+  }
+}());
+(function() {
+  'use strict';
+  
+  angular.module('mobile-bazaar.followers')
+  .service('FollowersService', FollowersService);
+  
+  FollowersService.$inject = ['$http'];
+  
+  function FollowersService($http) {
+    var APIURL = 'http://localhost:28469/api/followers';
+    var followers = {};
+    
+    
+    return {
+      getFollowers: getFollowers,
+      setFollowers: setFollowers  
+    };
+      
+    function getFollowers() {
+      console.log(following);
+      return following;
+    }    
+     
+    function setFollowers() {
+      $http.get(APIURL)
+      .then(function(res) {
+        followers = res.data.followers || {};
+      })
+      .catch(function(err){
+        console.log(err);
+      });
+    }
+    
+  }
+  
+}());
+(function() {
+  'use strict';
+  
+  angular.module('mobile-bazaar.following')
+  .controller('FollowingController', FollowingController);
+  
+  FollowingController.$inject = ['FollowingService'];
+  
+  function FollowingController(FollowingService) {
+    var vm = this;
+    vm.following = getFollowing;
+    
+    init();
+    
+    function init() {
+      FollowingService.setFollowing();
+    }
+    
+    function getFollowing() {
+      return FollowingService.getFollowing();
+    }
+  
+     return vm;
+  }
+  
+}());
+(function() {
+  'use strict';
+  angular
+    .module('mobile-bazaar.following')
+    .run(appRun);
+
+  appRun.$inject = ['routerHelper'];
+
+  function appRun(routerHelper) {
+    routerHelper.configureStates(getStates());
+  }
+
+  function getStates() {
+    return [
+      {
+        state: 'following',
+        config: {
+          url: '/following',
+          controller: 'FollowingController',
+          controllerAs: "following",
+          templateUrl: 'views/following.template.html'
+        }
+      }
+    ];
+  }
+}());
+(function() {
+  'use strict';
+  
+  angular.module('mobile-bazaar.following')
+  .service('FollowingService', FollowingService);
+  
+  FollowingService.$inject = ['$http'];
+  
+  function FollowingService($http) {
+    var APIURL = 'http://localhost:28469/api/following';
+    var following = {};
+    
+    
+    return {
+      getFollowing: getFollowing,
+      setFollowing: setFollowing  
+    };
+      
+    function getFollowing() {
+      console.log(following);
+      return following;
+    }    
+     
+    function setFollowing() {
+      $http.get(APIURL)
+      .then(function(res) {
+        following = res.data.following || {};
+      })
+      .catch(function(err){
+        console.log(err);
+      });
+    }
     
   }
   
