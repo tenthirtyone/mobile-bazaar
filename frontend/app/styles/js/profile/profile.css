@@ -1,9 +1,4 @@
-.no-padding {
-  padding: 0px 0px 0px 0px; }
-
-.profile-image {
-  max-width: 100%; }
-
-.mb-card {
-  background-color: transparent;
-  opacity: 0.5; }
+.md-profile-image {
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto; }

@@ -1,22 +1,26 @@
 <div ng-cloak>
-  <md-content class="md-padding" layout-xs="column" layout="row">
+  <md-content class="md-padding transparent" layout-xs="column" layout="row">
     <div flex-xs flex-gt-xs="50" layout="column">
-      <md-card>
+      <md-card class="transparent">
         <img src="/img/icon.png" class="md-card-image" alt="Mobile Bazaar">
-        <md-card-title>
-          <md-card-title-text>
-            <span class="md-headline">Vertical action buttons</span>
-          </md-card-title-text>
-        </md-card-title>
-        <md-card-content>
-          <p>
-            The titles of Washed Out's breakthrough song and the first single from Paracosm share the
-            two most important words in Ernest Greene's musical language: feel it. It's a simple request, as well...
-          </p>
-        </md-card-content>
+         <md-content class="transparent">
+          <div>
+            <form name="userForm">
+              <div layout-gt-sm="row">
+                <md-input-container class="md-block" flex-gt-sm>
+                  <label class="mb-label">Username</label>
+                  <input class="mb-input" ng-model="login.credentials.username">
+                </md-input-container>
+                <md-input-container class="md-block" flex-gt-sm>
+                  <label class="mb-label">Password</label>
+                  <input style="mb-input" ng-model="login.credentials.password">
+                </md-input-container>
+              </div>
+            </form>
+          </div>
+        </md-content>
         <md-card-actions layout="column" layout-align="start">
-          <md-button>Action 1</md-button>
-          <md-button>Action 2</md-button>
+          <md-button class="md-raised" ng-click="login.login(login.credentials)">Login</md-button>
         </md-card-actions>
       </md-card>
     </div>
