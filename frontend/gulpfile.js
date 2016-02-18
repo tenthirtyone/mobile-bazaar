@@ -24,6 +24,10 @@ var htmlReplaceStrings = {
 var vendorFiles = [
   'bower_components/angular/angular.js',
   'bower_components/angular-ui-router/release/angular-ui-router.js',
+  'bower_components/angular-animate/angular-animate.js',
+  'bower_components/angular-aria/angular-aria.js',
+  'bower_components/angular-messages/angular-messages.js',
+  'bower_components/angular-material/angular-material.js',
   'bower_components/ngstorage/ngStorage.js'
 ];
 
@@ -42,7 +46,7 @@ gulp.task('default', ['move', 'scss', 'scripts', 'views', 'vendor', 'images'], f
 });
 
 gulp.task('images', ['clean'], function() {
-  return gulp.src(['app/img/*.png', 'app/img/*.jpg'])
+  return gulp.src(['app/img/*.png', 'app/img/*.jpg', 'app/img/**/*svg'])
     .pipe(gulp.dest(buildDir + 'img/'))
 });
 

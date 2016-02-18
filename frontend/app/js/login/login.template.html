@@ -1,23 +1,28 @@
-<div class="login-section" style="padding: 13px;">
-<div class="row-fluid"> 
-  <div class="col-xs-6 col-xs-offset-3 col-lg-4 col-lg-offset-4">
-    <img class='login-image' src="img/icon.png"></a>
-  </div>
-</div>
-<div class="row-fluid">  
-  <div class="col-xs-12 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">
-    <form class="login-form">
-      <fieldset class="form-group">
-        <label>Username</label>
-        <input type="text" class="form-control" placeholder="Username" ng-model="login.credentials.username">
-      </fieldset>
-      <fieldset class="form-group">
-        <label>Password</label>
-        <input type="password" class="form-control" placeholder="Password" ng-model="login.credentials.password">
-      </fieldset>
-      <button type="submit" class="btn btn-primary" ng-click="login.login(login.credentials)">Login</button>
-      <div ng-show="login.isLoginError()">{{login.loginErrorMsg()}}</div>
-    </form>
-  </div>
-</div>
+<div ng-cloak>
+  <md-content class="md-padding transparent" layout-xs="column" layout="row">
+    <div flex-xs flex-gt-xs="50" layout="column">
+      <md-card class="transparent">
+        <img src="/img/icon.png" class="md-card-image" alt="Mobile Bazaar">
+         <md-content class="transparent">
+          <div>
+            <form name="userForm">
+              <div layout-gt-sm="row">
+                <md-input-container class="md-block" flex-gt-sm>
+                  <label class="mb-label">Username</label>
+                  <input class="mb-input" ng-model="login.credentials.username">
+                </md-input-container>
+                <md-input-container class="md-block" flex-gt-sm>
+                  <label class="mb-label">Password</label>
+                  <input style="mb-input" ng-model="login.credentials.password">
+                </md-input-container>
+              </div>
+            </form>
+          </div>
+        </md-content>
+        <md-card-actions layout="column" layout-align="start">
+          <md-button class="md-raised" ng-click="login.login(login.credentials)">Login</md-button>
+        </md-card-actions>
+      </md-card>
+    </div>
+  </md-content>
 </div>

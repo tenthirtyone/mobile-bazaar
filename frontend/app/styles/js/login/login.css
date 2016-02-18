@@ -1,18 +1,18 @@
-.login-form {
-  border: 1px solid #efefef;
-  border-radius: 2px;
-  padding: 10px;
-  margin-top: 15px;
-  margin-bottom: 15px; }
-
-.login-image {
-  display: block;
-  max-width: 150px;
-  height: auto;
+.md-card-image {
+  max-width: 50%;
   margin-left: auto;
   margin-right: auto; }
 
-.login-input {
-  width: 80%;
-  margin-top: 5px;
-  padding-top: 5px; }
+.transparent {
+  background-color: rgba(0, 0, 0, 0.01); }
+
+md-card-actions md-button {
+  background-color: #ffffff; }
+
+md-content md-card {
+  color: #ffffff; }
+
+.mb-label, md-input-container .md-input {
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 1.25em; }

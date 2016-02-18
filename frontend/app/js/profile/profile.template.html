@@ -1,3 +1,46 @@
-<h2>Profile</h2>
-
-<div ng-repeat="(key, value) in profile.profile()">{{key}} : {{value}}</div>
+<div ng-cloak>
+  <img src="img/demo-store-image.jpg" class="md-profile-image" alt="Washed Out">
+  <md-content>
+    <md-tabs md-dynamic-height md-border-bottom>
+      <md-tab label="About">
+        <md-content class="md-padding">
+          <h1 class="md-display-2">About</h1>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur felis nec, feugiat ultricies mi.</p>
+        </md-content>
+      </md-tab>
+      <md-tab label="Followers">
+        <md-content class="md-padding">
+          <md-content>
+            <md-list>
+              <md-subheader class="md-no-sticky">3 line item</md-subheader>
+              <md-list-item class="md-3-line">
+                <img src="img/smiley.png" class="md-avatar" >
+                <div class="md-list-item-text" layout="column">
+                  <h3>Who</h3>
+                  <h4>What</h4>
+                  <p>Notes</p>
+                </div>
+                <div>
+                <md-button class="md-raised">Unfollow</md-button>
+                </div>
+              </md-list-item>
+              <md-divider ></md-divider>
+            </md-list>
+          </md-content>
+        </md-content>
+      </md-tab>
+      <md-tab label="Following">
+        <md-content class="md-padding">
+          <h1 class="md-display-2">Following</h1>
+          <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+        </md-content>
+      </md-tab>
+      <md-tab label="Store">
+        <md-content class="md-padding">
+          <h1 class="md-display-2">Store</h1>
+          <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+        </md-content>
+      </md-tab>
+    </md-tabs>
+  </md-content>
+</div>
