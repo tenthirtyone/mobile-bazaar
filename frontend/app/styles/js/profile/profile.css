@@ -5,4 +5,5 @@
   max-width: 100%; }
 
 .mb-card {
-  background-color: #f6f6f6; }
+  background-color: transparent;
+  opacity: 0.5; }

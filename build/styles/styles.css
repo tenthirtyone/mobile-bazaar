@@ -14283,31 +14283,18 @@ html {
   height: 100%; }
 
 body {
-  margin-top: 50px; }
+  margin-top: 50px;
+  background: #85a1bf; }
 
 .page-wrapper {
   height: 100%;
   width: 100%; }
 
 
-.login-form {
-  border: 1px solid #efefef;
-  border-radius: 2px;
-  padding: 10px;
-  margin-top: 15px;
-  margin-bottom: 15px; }
-
-.login-image {
-  display: block;
-  max-width: 150px;
-  height: auto;
+.md-card-image {
+  max-width: 50%;
   margin-left: auto;
   margin-right: auto; }
-
-.login-input {
-  width: 80%;
-  margin-top: 5px;
-  padding-top: 5px; }
 
 .no-padding {
   padding: 0px 0px 0px 0px; }
@@ -14316,6 +14303,7 @@ body {
   max-width: 100%; }
 
 .mb-card {
-  background-color: #f6f6f6; }
+  background-color: transparent;
+  opacity: 0.5; }
 
 

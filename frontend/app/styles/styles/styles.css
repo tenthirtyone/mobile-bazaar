@@ -2,7 +2,8 @@ html {
   height: 100%; }
 
 body {
-  margin-top: 50px; }
+  margin-top: 50px;
+  background: #85a1bf; }
 
 .page-wrapper {
   height: 100%;
