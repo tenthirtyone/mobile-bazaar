@@ -6,7 +6,7 @@
   
   StoreController.$inject = ['StoreService'];
   
-  function StoreController(StoreController) {
+  function StoreController(StoreService) {
     var vm = this;
     
     init();

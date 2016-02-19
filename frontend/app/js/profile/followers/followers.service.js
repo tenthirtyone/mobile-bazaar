@@ -17,7 +17,6 @@
     };
       
     function getFollowers() {
-      console.log(following);
       return following;
     }    
      

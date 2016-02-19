@@ -33,7 +33,6 @@
     function setProfile() {
       $http.get(APIURL)
       .then(function(res) {
-        console.log(res);  
         profile = res.data.profile || {};
       })
       .catch(function(err){

@@ -10,7 +10,8 @@
   angular.module('mobile-bazaar.profile', [
     'mobile-bazaar.about',
     'mobile-bazaar.followers',
-    'mobile-bazaar.following'
+    'mobile-bazaar.following',
+    'mobile-bazaar.store'
   ]);
   
 }());
@@ -336,39 +337,21 @@
     var vm = this;
 
     vm.tabs = [];
-    
+       
     init();
     
     function init() {
-      console.log(routerHelper.getStates());
       angular.forEach(routerHelper.getStates(), function(state) {
-        console.log(state);
         if (state.name === 'profile') {
           angular.forEach(state.views, function(view) {
             if (view.isTab) {
               this.push(view);
             }
-          }, vm.tabs)
+          }, vm.tabs);
         }
       });       
-      //vm.tabs.sort(compare);  
-      console.log(vm.tabs);
-    }
-    
-    function compare(a,b) {
-      
-      if (a.name < b.name)
-        return -1;
-      else if (a.name > b.name)
-        return 1;
-      else 
-        return 0;
     }
 
-    function swipeLeft() {
-      console.log('left swipe');
-    }
-    
      return vm;
   }
   
@@ -526,7 +509,6 @@
     function setProfile() {
       $http.get(APIURL)
       .then(function(res) {
-        console.log(res);  
         profile = res.data.profile || {};
       })
       .catch(function(err){
@@ -545,7 +527,7 @@
   
   FollowersController.$inject = ['FollowersService'];
   
-  function FollowersController(FollowerService) {
+  function FollowersController(FollowersService) {
     var vm = this;
     vm.followers = getFollowers;
     
@@ -582,7 +564,6 @@
     };
       
     function getFollowers() {
-      console.log(following);
       return following;
     }    
      
@@ -644,7 +625,6 @@
     };
       
     function getFollowing() {
-      console.log(following);
       return following;
     }    
      
@@ -669,7 +649,7 @@
   
   StoreController.$inject = ['StoreService'];
   
-  function StoreController(StoreController) {
+  function StoreController(StoreService) {
     var vm = this;
     
     init();

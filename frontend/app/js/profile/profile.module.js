@@ -4,7 +4,8 @@
   angular.module('mobile-bazaar.profile', [
     'mobile-bazaar.about',
     'mobile-bazaar.followers',
-    'mobile-bazaar.following'
+    'mobile-bazaar.following',
+    'mobile-bazaar.store'
   ]);
   
 }());
