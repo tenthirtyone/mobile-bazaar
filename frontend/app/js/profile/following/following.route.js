@@ -18,7 +18,9 @@
           url: '/following',
           controller: 'FollowingController',
           controllerAs: "following",
-          templateUrl: 'views/following.template.html'
+          templateUrl: 'views/following.template.html',
+          // Custom route parameters
+          profileTab: true
         }
       }
     ];

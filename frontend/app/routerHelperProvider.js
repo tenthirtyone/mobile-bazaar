@@ -18,17 +18,17 @@
 
       function RouterHelper($state) {
           var service = {
-              configureStates: configureStates,
-              getStates: getStates
+            configureStates: configureStates,
+            getStates: getStates
           };
 
           return service;
 
           function configureStates(states, otherwisePath) {
-              states.forEach(function(state) {
-                  $stateProvider.state(state.state, state.config);
-              });
-              $urlRouterProvider.otherwise("login");
+            states.forEach(function(state) {
+                $stateProvider.state(state.state, state.config);
+            });
+            $urlRouterProvider.otherwise("login");
           }
 
           function getStates() { return $state.get(); }

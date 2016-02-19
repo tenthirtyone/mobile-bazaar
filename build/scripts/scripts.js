@@ -7,13 +7,23 @@
 (function() {
   'use strict';
   
-  angular.module('mobile-bazaar.profile', []);
+  angular.module('mobile-bazaar.profile', [
+    'mobile-bazaar.about',
+    'mobile-bazaar.followers',
+    'mobile-bazaar.following'
+  ]);
   
 }());
 (function() {
   'use strict';
   
   angular.module('mobile-bazaar.directives', []);
+  
+}());
+(function() {
+  'use strict';
+  
+  angular.module('mobile-bazaar.about', []);
   
 }());
 (function() {
@@ -155,17 +165,17 @@
 
       function RouterHelper($state) {
           var service = {
-              configureStates: configureStates,
-              getStates: getStates
+            configureStates: configureStates,
+            getStates: getStates
           };
 
           return service;
 
           function configureStates(states, otherwisePath) {
-              states.forEach(function(state) {
-                  $stateProvider.state(state.state, state.config);
-              });
-              $urlRouterProvider.otherwise("login");
+            states.forEach(function(state) {
+                $stateProvider.state(state.state, state.config);
+            });
+            $urlRouterProvider.otherwise("login");
           }
 
           function getStates() { return $state.get(); }
@@ -316,19 +326,44 @@
   angular.module('mobile-bazaar.profile')
   .controller('ProfileController', ProfileController);
   
-  ProfileController.$inject = ['ProfileService'];
+  ProfileController.$inject = ['ProfileService', 'routerHelper'];
   
-  function ProfileController(ProfileService) {
+  function ProfileController(ProfileService, routerHelper) {
     var vm = this;
-    
+  
+    vm.swipeLeft = swipeLeft;
     vm.guid = getGUID;
     vm.profile = getProfile;
+    vm.tabs = [];
     vm.website = getWebsite;
-
+    
     init();
     
     function init() {
       ProfileService.setProfile();
+      angular.forEach(routerHelper.getStates(), function(state) {
+        console.log(state);
+        if (state.profileTab) {
+          this.push(state);
+        }
+      }, vm.tabs);       
+      vm.tabs.sort(compare);  
+    }
+    
+    function compare(a,b) {
+      
+      if (a.name < b.name)
+        return -1;
+      else if (a.name > b.name)
+        return 1;
+      else 
+        return 0;
+    }
+
+  
+    
+    function swipeLeft() {
+      console.log('left swipe');
     }
     
     function getGUID() {
@@ -449,6 +484,74 @@
 (function() {
   'use strict';
   
+  angular.module('mobile-bazaar.about')
+  .controller('AboutController', AboutController);
+  
+  AboutController.$inject = ['AboutService'];
+  
+  function AboutController(AboutController) {
+    var vm = this;
+    
+    init();
+    
+    function init() {
+      
+    }
+    
+     return vm;
+  }
+  
+}());
+(function() {
+  'use strict';
+  angular
+    .module('mobile-bazaar.about')
+    .run(appRun);
+
+  appRun.$inject = ['routerHelper'];
+
+  function appRun(routerHelper) {
+    routerHelper.configureStates(getStates());
+  }
+
+  function getStates() {
+    return [
+      {
+        state: 'about',
+        config: {
+          url: '/about',
+          controller: 'AboutController',
+          controllerAs: "about",
+          templateUrl: 'views/about.template.html',
+          // Custom route parameters
+          profileTab: true
+        }
+      }
+    ];
+  }
+}());
+(function() {
+  'use strict';
+  
+  angular.module('mobile-bazaar.about')
+  .service('AboutService', AboutService);
+  
+  AboutService.$inject = ['$http'];
+  
+  function AboutService($http) {
+    var APIURL = 'http://localhost:28469/api/profile';
+    var followers = {};
+    
+    return {
+     
+    };
+       
+  }
+  
+}());
+(function() {
+  'use strict';
+  
   angular.module('mobile-bazaar.followers')
   .controller('FollowersController', FollowersController);
   
@@ -492,7 +595,9 @@
           url: '/followers',
           controller: 'FollowersController',
           controllerAs: "followers",
-          templateUrl: 'views/followers.template.html'
+          templateUrl: 'views/followers.template.html',
+          // Custom route parameters
+          profileTab: true
         }
       }
     ];
@@ -580,7 +685,9 @@
           url: '/following',
           controller: 'FollowingController',
           controllerAs: "following",
-          templateUrl: 'views/following.template.html'
+          templateUrl: 'views/following.template.html',
+          // Custom route parameters
+          profileTab: true
         }
       }
     ];

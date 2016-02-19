@@ -18,7 +18,9 @@
           url: '/followers',
           controller: 'FollowersController',
           controllerAs: "followers",
-          templateUrl: 'views/followers.template.html'
+          templateUrl: 'views/followers.template.html',
+          // Custom route parameters
+          profileTab: true
         }
       }
     ];
