@@ -4,33 +4,27 @@
   angular.module('mobile-bazaar.profile')
   .controller('ProfileController', ProfileController);
   
-  ProfileController.$inject = ['ProfileService'];
+  ProfileController.$inject = ['ProfileService', 'routerHelper'];
   
-  function ProfileController(ProfileService) {
+  function ProfileController(ProfileService, routerHelper) {
     var vm = this;
-    
-    vm.guid = getGUID;
-    vm.profile = getProfile;
-    vm.website = getWebsite;
 
+    vm.tabs = [];
+       
     init();
     
     function init() {
-      ProfileService.setProfile();
+      angular.forEach(routerHelper.getStates(), function(state) {
+        if (state.name === 'profile') {
+          angular.forEach(state.views, function(view) {
+            if (view.isTab) {
+              this.push(view);
+            }
+          }, vm.tabs);
+        }
+      });       
     }
-    
-    function getGUID() {
-      return ProfileService.getGUID();
-    }
-           
-    function getProfile() {
-      return ProfileService.getProfile();
-    }
-            
-    function getWebsite() {
-      return ProfileService.getWebsite();
-    }
-        
+
      return vm;
   }
   

@@ -16349,14 +16349,14 @@ md-tooltip {
 body {
   background-color: #063753; }
 
+.transparent {
+  background-color: rgba(0, 0, 0, 0.01); }
+
 
 .md-card-image {
   max-width: 50%;
   margin-left: auto;
   margin-right: auto; }
-
-.transparent {
-  background-color: rgba(0, 0, 0, 0.01); }
 
 md-card-actions md-button {
   background-color: #ffffff; }
@@ -16369,10 +16369,17 @@ md-content md-card {
   font-weight: 600;
   font-size: 1.25em; }
 
-.md-profile-image {
+.mb-profile-image {
   max-width: 100%;
   margin-left: auto;
   margin-right: auto; }
+
+/*
+md-content, mb-profile-content {
+  background-color: rgba(255,255,255,0.05);
+  color: #ffffff;
+}
+*/
 
 h2 span {
   color: #ffffff;

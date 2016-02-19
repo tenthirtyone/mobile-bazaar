@@ -6,7 +6,7 @@
   
   FollowersController.$inject = ['FollowersService'];
   
-  function FollowersController(FollowerService) {
+  function FollowersController(FollowersService) {
     var vm = this;
     vm.followers = getFollowers;
     

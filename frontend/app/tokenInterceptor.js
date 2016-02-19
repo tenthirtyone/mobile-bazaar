@@ -15,8 +15,6 @@
               return config;
           },
           response: function(response) {
-            console.log('In Response');
-            console.log(response.headers('Authorization'));
             if(response.headers('Authorization')) {
               $sessionStorage.token = response.headers('Authorization');
             }

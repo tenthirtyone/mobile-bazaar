@@ -7,13 +7,24 @@
 (function() {
   'use strict';
   
-  angular.module('mobile-bazaar.profile', []);
+  angular.module('mobile-bazaar.profile', [
+    'mobile-bazaar.about',
+    'mobile-bazaar.followers',
+    'mobile-bazaar.following',
+    'mobile-bazaar.store'
+  ]);
   
 }());
 (function() {
   'use strict';
   
   angular.module('mobile-bazaar.directives', []);
+  
+}());
+(function() {
+  'use strict';
+  
+  angular.module('mobile-bazaar.about', []);
   
 }());
 (function() {
@@ -26,6 +37,12 @@
   'use strict';
   
   angular.module('mobile-bazaar.following', []);
+  
+}());
+(function() {
+  'use strict';
+  
+  angular.module('mobile-bazaar.store', []);
   
 }());
 (function() {
@@ -155,17 +172,17 @@
 
       function RouterHelper($state) {
           var service = {
-              configureStates: configureStates,
-              getStates: getStates
+            configureStates: configureStates,
+            getStates: getStates
           };
 
           return service;
 
           function configureStates(states, otherwisePath) {
-              states.forEach(function(state) {
-                  $stateProvider.state(state.state, state.config);
-              });
-              $urlRouterProvider.otherwise("login");
+            states.forEach(function(state) {
+                $stateProvider.state(state.state, state.config);
+            });
+            $urlRouterProvider.otherwise("login");
           }
 
           function getStates() { return $state.get(); }
@@ -189,8 +206,6 @@
               return config;
           },
           response: function(response) {
-            console.log('In Response');
-            console.log(response.headers('Authorization'));
             if(response.headers('Authorization')) {
               $sessionStorage.token = response.headers('Authorization');
             }
@@ -316,33 +331,27 @@
   angular.module('mobile-bazaar.profile')
   .controller('ProfileController', ProfileController);
   
-  ProfileController.$inject = ['ProfileService'];
+  ProfileController.$inject = ['ProfileService', 'routerHelper'];
   
-  function ProfileController(ProfileService) {
+  function ProfileController(ProfileService, routerHelper) {
     var vm = this;
-    
-    vm.guid = getGUID;
-    vm.profile = getProfile;
-    vm.website = getWebsite;
 
+    vm.tabs = [];
+       
     init();
     
     function init() {
-      ProfileService.setProfile();
+      angular.forEach(routerHelper.getStates(), function(state) {
+        if (state.name === 'profile') {
+          angular.forEach(state.views, function(view) {
+            if (view.isTab) {
+              this.push(view);
+            }
+          }, vm.tabs);
+        }
+      });       
     }
-    
-    function getGUID() {
-      return ProfileService.getGUID();
-    }
-           
-    function getProfile() {
-      return ProfileService.getProfile();
-    }
-            
-    function getWebsite() {
-      return ProfileService.getWebsite();
-    }
-        
+
      return vm;
   }
   
@@ -365,13 +374,44 @@
         state: 'profile',
         config: {
           url: '/profile',
-          controller: 'ProfileController',
-          controllerAs: "profile",
-          templateUrl: 'views/profile.template.html'
-        }
-      }
-    ];
-  }
+          views: {
+              '': {
+                templateUrl: 'views/profile.template.html',
+                controller: 'ProfileController',
+                controllerAs: 'profile',
+              },
+              'about@profile': {
+                templateUrl: 'views/about.template.html',
+                controller: 'AboutController',
+                controllerAs: 'about',
+                name: 'about',
+                isTab: true,
+              },
+              'following@profile': {
+                templateUrl: 'views/following.template.html',
+                controller: 'FollowingController',
+                controllerAs: 'following',
+                name: 'following',
+                isTab: true,
+              },
+              'followers@profile': {
+                templateUrl: 'views/followers.template.html',
+                controller: 'FollowersController',
+                controllerAs: 'followers',
+                name: 'followers',
+                isTab: true,
+              },
+              'store@profile': {
+                templateUrl: 'views/store.template.html',
+                controller: 'StoreController',
+                controllerAs: 'store',
+                name: 'store',
+                isTab: true,
+              },
+          }          
+          }
+      }];
+    }
 }());
 (function() {
   'use strict';
@@ -382,39 +422,6 @@
   ProfileService.$inject = ['$http'];
   
   function ProfileService($http) {
-    var APIURL = 'http://localhost:28469/api/profile';
-    var profile = {};
-    
-    
-    return {
-      getGUID: getGUID,    
-      getProfile: getProfile,
-      getWebsite: getWebsite,
-      setProfile: setProfile    
-    };
-    
-    function getGUID() {
-      return profile.guid;
-    }    
-        
-    function getProfile() {
-      return profile;
-    }    
-    
-    function getWebsite() {
-      return profile.website || 'No Website Defined';
-    }
-    
-    function setProfile() {
-      $http.get(APIURL)
-      .then(function(res) {
-        console.log(res);  
-        profile = res.data.profile || {};
-      })
-      .catch(function(err){
-        console.log(err);
-      });
-    }
     
   }
   
@@ -449,12 +456,78 @@
 (function() {
   'use strict';
   
+  angular.module('mobile-bazaar.about')
+  .controller('AboutController', AboutController);
+  
+  AboutController.$inject = ['AboutService'];
+  
+  function AboutController(AboutController) {
+    var vm = this;
+    
+    init();
+    
+    function init() {
+      
+    }
+    
+     return vm;
+  }
+  
+}());
+(function() {
+  'use strict';
+  
+  angular.module('mobile-bazaar.about')
+  .service('AboutService', AboutService);
+  
+  AboutService.$inject = ['$http'];
+  
+  function AboutService($http) {
+    var APIURL = 'http://localhost:28469/api/profile';
+    var profile = {};
+    
+    
+    return {
+      getGUID: getGUID,    
+      getProfile: getProfile,
+      getWebsite: getWebsite,
+      setProfile: setProfile    
+    };
+    
+    function getGUID() {
+      return profile.guid;
+    }    
+        
+    function getProfile() {
+      return profile;
+    }    
+    
+    function getWebsite() {
+      return profile.website || 'No Website Defined';
+    }
+    
+    function setProfile() {
+      $http.get(APIURL)
+      .then(function(res) {
+        profile = res.data.profile || {};
+      })
+      .catch(function(err){
+        console.log(err);
+      });
+    }
+    
+  }
+  
+}());
+(function() {
+  'use strict';
+  
   angular.module('mobile-bazaar.followers')
   .controller('FollowersController', FollowersController);
   
   FollowersController.$inject = ['FollowersService'];
   
-  function FollowersController(FollowerService) {
+  function FollowersController(FollowersService) {
     var vm = this;
     vm.followers = getFollowers;
     
@@ -471,32 +544,6 @@
      return vm;
   }
   
-}());
-(function() {
-  'use strict';
-  angular
-    .module('mobile-bazaar.followers')
-    .run(appRun);
-
-  appRun.$inject = ['routerHelper'];
-
-  function appRun(routerHelper) {
-    routerHelper.configureStates(getStates());
-  }
-
-  function getStates() {
-    return [
-      {
-        state: 'followers',
-        config: {
-          url: '/followers',
-          controller: 'FollowersController',
-          controllerAs: "followers",
-          templateUrl: 'views/followers.template.html'
-        }
-      }
-    ];
-  }
 }());
 (function() {
   'use strict';
@@ -517,7 +564,6 @@
     };
       
     function getFollowers() {
-      console.log(following);
       return following;
     }    
      
@@ -562,32 +608,6 @@
 }());
 (function() {
   'use strict';
-  angular
-    .module('mobile-bazaar.following')
-    .run(appRun);
-
-  appRun.$inject = ['routerHelper'];
-
-  function appRun(routerHelper) {
-    routerHelper.configureStates(getStates());
-  }
-
-  function getStates() {
-    return [
-      {
-        state: 'following',
-        config: {
-          url: '/following',
-          controller: 'FollowingController',
-          controllerAs: "following",
-          templateUrl: 'views/following.template.html'
-        }
-      }
-    ];
-  }
-}());
-(function() {
-  'use strict';
   
   angular.module('mobile-bazaar.following')
   .service('FollowingService', FollowingService);
@@ -605,7 +625,6 @@
     };
       
     function getFollowing() {
-      console.log(following);
       return following;
     }    
      
@@ -619,6 +638,46 @@
       });
     }
     
+  }
+  
+}());
+(function() {
+  'use strict';
+  
+  angular.module('mobile-bazaar.store')
+  .controller('StoreController', StoreController);
+  
+  StoreController.$inject = ['StoreService'];
+  
+  function StoreController(StoreService) {
+    var vm = this;
+    
+    init();
+    
+    function init() {
+      
+    }
+    
+     return vm;
+  }
+  
+}());
+(function() {
+  'use strict';
+  
+  angular.module('mobile-bazaar.about')
+  .service('StoreService', StoreService);
+  
+  StoreService.$inject = ['$http'];
+  
+  function StoreService($http) {
+    var APIURL = 'http://localhost:28469/api/profile';
+    var followers = {};
+    
+    return {
+     
+    };
+       
   }
   
 }());
