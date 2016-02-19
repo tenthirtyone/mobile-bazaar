@@ -1,5 +1,7 @@
 # Mobile Bazaar
 
+[[https://github.com/tenthirtyone/mobile-bazaar/blob/master/Mockup.png|alt=mockup]]
+
 Mobile Bazaar is an AngularJS mobile front end for Open Bazaar for Android.
 
 # What is Open Bazaar?
