@@ -345,7 +345,9 @@
         console.log(state);
         if (state.name === 'profile') {
           angular.forEach(state.views, function(view) {
-            this.push(view);
+            if (view.isTab) {
+              this.push(view);
+            }
           }, vm.tabs)
         }
       });       
@@ -399,13 +401,29 @@
                 templateUrl: 'views/about.template.html',
                 controller: 'AboutController',
                 controllerAs: 'about',
-                name: 'About',
+                name: 'about',
+                isTab: true,
               },
-              'leftWidgetOne@profile': {
-                template: '<h2>One</2>',
+              'following@profile': {
+                templateUrl: 'views/following.template.html',
+                controller: 'FollowingController',
+                controllerAs: 'following',
+                name: 'following',
+                isTab: true,
               },
-              'leftWidgetTwo@profile': {
-                template: '<h2>Two</2>',
+              'followers@profile': {
+                templateUrl: 'views/followers.template.html',
+                controller: 'FollowersController',
+                controllerAs: 'followers',
+                name: 'followers',
+                isTab: true,
+              },
+              'store@profile': {
+                templateUrl: 'views/store.template.html',
+                controller: 'StoreController',
+                controllerAs: 'store',
+                name: 'store',
+                isTab: true,
               },
           }          
           }
@@ -547,34 +565,6 @@
 }());
 (function() {
   'use strict';
-  angular
-    .module('mobile-bazaar.followers')
-    .run(appRun);
-
-  appRun.$inject = ['routerHelper'];
-
-  function appRun(routerHelper) {
-    routerHelper.configureStates(getStates());
-  }
-
-  function getStates() {
-    return [
-      {
-        state: 'followers',
-        config: {
-          url: '/followers',
-          controller: 'FollowersController',
-          controllerAs: "followers",
-          templateUrl: 'views/followers.template.html',
-          // Custom route parameters
-          profileTab: true
-        }
-      }
-    ];
-  }
-}());
-(function() {
-  'use strict';
   
   angular.module('mobile-bazaar.followers')
   .service('FollowersService', FollowersService);
@@ -637,34 +627,6 @@
 }());
 (function() {
   'use strict';
-  angular
-    .module('mobile-bazaar.following')
-    .run(appRun);
-
-  appRun.$inject = ['routerHelper'];
-
-  function appRun(routerHelper) {
-    routerHelper.configureStates(getStates());
-  }
-
-  function getStates() {
-    return [
-      {
-        state: 'following',
-        config: {
-          url: '/following',
-          controller: 'FollowingController',
-          controllerAs: "following",
-          templateUrl: 'views/following.template.html',
-          // Custom route parameters
-          profileTab: true
-        }
-      }
-    ];
-  }
-}());
-(function() {
-  'use strict';
   
   angular.module('mobile-bazaar.following')
   .service('FollowingService', FollowingService);
@@ -719,34 +681,6 @@
      return vm;
   }
   
-}());
-(function() {
-  'use strict';
-  angular
-    .module('mobile-bazaar.store')
-    .run(appRun);
-
-  appRun.$inject = ['routerHelper'];
-
-  function appRun(routerHelper) {
-    routerHelper.configureStates(getStates());
-  }
-
-  function getStates() {
-    return [
-      {
-        state: 'store',
-        config: {
-          url: '/store',
-          controller: 'StoreController',
-          controllerAs: "store",
-          templateUrl: 'views/store.template.html',
-          // Custom route parameters
-          profileTab: true
-        }
-      }
-    ];
-  }
 }());
 (function() {
   'use strict';

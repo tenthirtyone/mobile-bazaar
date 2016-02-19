@@ -19,7 +19,9 @@
         console.log(state);
         if (state.name === 'profile') {
           angular.forEach(state.views, function(view) {
-            this.push(view);
+            if (view.isTab) {
+              this.push(view);
+            }
           }, vm.tabs)
         }
       });       

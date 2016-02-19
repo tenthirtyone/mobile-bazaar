@@ -26,13 +26,29 @@
                 templateUrl: 'views/about.template.html',
                 controller: 'AboutController',
                 controllerAs: 'about',
-                name: 'About',
+                name: 'about',
+                isTab: true,
               },
-              'leftWidgetOne@profile': {
-                template: '<h2>One</2>',
+              'following@profile': {
+                templateUrl: 'views/following.template.html',
+                controller: 'FollowingController',
+                controllerAs: 'following',
+                name: 'following',
+                isTab: true,
               },
-              'leftWidgetTwo@profile': {
-                template: '<h2>Two</2>',
+              'followers@profile': {
+                templateUrl: 'views/followers.template.html',
+                controller: 'FollowersController',
+                controllerAs: 'followers',
+                name: 'followers',
+                isTab: true,
+              },
+              'store@profile': {
+                templateUrl: 'views/store.template.html',
+                controller: 'StoreController',
+                controllerAs: 'store',
+                name: 'store',
+                isTab: true,
               },
           }          
           }

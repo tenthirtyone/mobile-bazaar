@@ -3,7 +3,8 @@
   <md-content>
     <md-tabs md-dynamic-height md-border-bottom class="transparent">
       <md-tab label="{{tab.name}}" ng-repeat="tab in profile.tabs">
-        <div ui-view="about"></div>                
+        <div ui-view="{{tab.name}}"></div>                
+        {{tab}}
       </md-tab>
     </md-tabs>
   </md-content>
