@@ -40,6 +40,12 @@
 }());
 (function() {
   'use strict';
+  
+  angular.module('mobile-bazaar.store', []);
+  
+}());
+(function() {
+  'use strict';
     
   angular.module('mobile-bazaar', [
     'mobile-bazaar.directives',
@@ -199,8 +205,6 @@
               return config;
           },
           response: function(response) {
-            console.log('In Response');
-            console.log(response.headers('Authorization'));
             if(response.headers('Authorization')) {
               $sessionStorage.token = response.headers('Authorization');
             }
@@ -330,24 +334,23 @@
   
   function ProfileController(ProfileService, routerHelper) {
     var vm = this;
-  
-    vm.swipeLeft = swipeLeft;
-    vm.guid = getGUID;
-    vm.profile = getProfile;
+
     vm.tabs = [];
-    vm.website = getWebsite;
     
     init();
     
     function init() {
-      ProfileService.setProfile();
+      console.log(routerHelper.getStates());
       angular.forEach(routerHelper.getStates(), function(state) {
         console.log(state);
-        if (state.profileTab) {
-          this.push(state);
+        if (state.name === 'profile') {
+          angular.forEach(state.views, function(view) {
+            this.push(view);
+          }, vm.tabs)
         }
-      }, vm.tabs);       
-      vm.tabs.sort(compare);  
+      });       
+      //vm.tabs.sort(compare);  
+      console.log(vm.tabs);
     }
     
     function compare(a,b) {
@@ -360,24 +363,10 @@
         return 0;
     }
 
-  
-    
     function swipeLeft() {
       console.log('left swipe');
     }
     
-    function getGUID() {
-      return ProfileService.getGUID();
-    }
-           
-    function getProfile() {
-      return ProfileService.getProfile();
-    }
-            
-    function getWebsite() {
-      return ProfileService.getWebsite();
-    }
-        
      return vm;
   }
   
@@ -400,13 +389,28 @@
         state: 'profile',
         config: {
           url: '/profile',
-          controller: 'ProfileController',
-          controllerAs: "profile",
-          templateUrl: 'views/profile.template.html'
-        }
-      }
-    ];
-  }
+          views: {
+              '': {
+                templateUrl: 'views/profile.template.html',
+                controller: 'ProfileController',
+                controllerAs: 'profile',
+              },
+              'about@profile': {
+                templateUrl: 'views/about.template.html',
+                controller: 'AboutController',
+                controllerAs: 'about',
+                name: 'About',
+              },
+              'leftWidgetOne@profile': {
+                template: '<h2>One</2>',
+              },
+              'leftWidgetTwo@profile': {
+                template: '<h2>Two</2>',
+              },
+          }          
+          }
+      }];
+    }
 }());
 (function() {
   'use strict';
@@ -417,39 +421,6 @@
   ProfileService.$inject = ['$http'];
   
   function ProfileService($http) {
-    var APIURL = 'http://localhost:28469/api/profile';
-    var profile = {};
-    
-    
-    return {
-      getGUID: getGUID,    
-      getProfile: getProfile,
-      getWebsite: getWebsite,
-      setProfile: setProfile    
-    };
-    
-    function getGUID() {
-      return profile.guid;
-    }    
-        
-    function getProfile() {
-      return profile;
-    }    
-    
-    function getWebsite() {
-      return profile.website || 'No Website Defined';
-    }
-    
-    function setProfile() {
-      $http.get(APIURL)
-      .then(function(res) {
-        console.log(res);  
-        profile = res.data.profile || {};
-      })
-      .catch(function(err){
-        console.log(err);
-      });
-    }
     
   }
   
@@ -504,34 +475,6 @@
 }());
 (function() {
   'use strict';
-  angular
-    .module('mobile-bazaar.about')
-    .run(appRun);
-
-  appRun.$inject = ['routerHelper'];
-
-  function appRun(routerHelper) {
-    routerHelper.configureStates(getStates());
-  }
-
-  function getStates() {
-    return [
-      {
-        state: 'about',
-        config: {
-          url: '/about',
-          controller: 'AboutController',
-          controllerAs: "about",
-          templateUrl: 'views/about.template.html',
-          // Custom route parameters
-          profileTab: true
-        }
-      }
-    ];
-  }
-}());
-(function() {
-  'use strict';
   
   angular.module('mobile-bazaar.about')
   .service('AboutService', AboutService);
@@ -540,12 +483,39 @@
   
   function AboutService($http) {
     var APIURL = 'http://localhost:28469/api/profile';
-    var followers = {};
+    var profile = {};
+    
     
     return {
-     
+      getGUID: getGUID,    
+      getProfile: getProfile,
+      getWebsite: getWebsite,
+      setProfile: setProfile    
     };
-       
+    
+    function getGUID() {
+      return profile.guid;
+    }    
+        
+    function getProfile() {
+      return profile;
+    }    
+    
+    function getWebsite() {
+      return profile.website || 'No Website Defined';
+    }
+    
+    function setProfile() {
+      $http.get(APIURL)
+      .then(function(res) {
+        console.log(res);  
+        profile = res.data.profile || {};
+      })
+      .catch(function(err){
+        console.log(err);
+      });
+    }
+    
   }
   
 }());
@@ -726,6 +696,74 @@
       });
     }
     
+  }
+  
+}());
+(function() {
+  'use strict';
+  
+  angular.module('mobile-bazaar.store')
+  .controller('StoreController', StoreController);
+  
+  StoreController.$inject = ['StoreService'];
+  
+  function StoreController(StoreController) {
+    var vm = this;
+    
+    init();
+    
+    function init() {
+      
+    }
+    
+     return vm;
+  }
+  
+}());
+(function() {
+  'use strict';
+  angular
+    .module('mobile-bazaar.store')
+    .run(appRun);
+
+  appRun.$inject = ['routerHelper'];
+
+  function appRun(routerHelper) {
+    routerHelper.configureStates(getStates());
+  }
+
+  function getStates() {
+    return [
+      {
+        state: 'store',
+        config: {
+          url: '/store',
+          controller: 'StoreController',
+          controllerAs: "store",
+          templateUrl: 'views/store.template.html',
+          // Custom route parameters
+          profileTab: true
+        }
+      }
+    ];
+  }
+}());
+(function() {
+  'use strict';
+  
+  angular.module('mobile-bazaar.about')
+  .service('StoreService', StoreService);
+  
+  StoreService.$inject = ['$http'];
+  
+  function StoreService($http) {
+    var APIURL = 'http://localhost:28469/api/profile';
+    var followers = {};
+    
+    return {
+     
+    };
+       
   }
   
 }());

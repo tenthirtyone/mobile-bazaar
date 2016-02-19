@@ -8,24 +8,23 @@
   
   function ProfileController(ProfileService, routerHelper) {
     var vm = this;
-  
-    vm.swipeLeft = swipeLeft;
-    vm.guid = getGUID;
-    vm.profile = getProfile;
+
     vm.tabs = [];
-    vm.website = getWebsite;
     
     init();
     
     function init() {
-      ProfileService.setProfile();
+      console.log(routerHelper.getStates());
       angular.forEach(routerHelper.getStates(), function(state) {
         console.log(state);
-        if (state.profileTab) {
-          this.push(state);
+        if (state.name === 'profile') {
+          angular.forEach(state.views, function(view) {
+            this.push(view);
+          }, vm.tabs)
         }
-      }, vm.tabs);       
-      vm.tabs.sort(compare);  
+      });       
+      //vm.tabs.sort(compare);  
+      console.log(vm.tabs);
     }
     
     function compare(a,b) {
@@ -38,24 +37,10 @@
         return 0;
     }
 
-  
-    
     function swipeLeft() {
       console.log('left swipe');
     }
     
-    function getGUID() {
-      return ProfileService.getGUID();
-    }
-           
-    function getProfile() {
-      return ProfileService.getProfile();
-    }
-            
-    function getWebsite() {
-      return ProfileService.getWebsite();
-    }
-        
      return vm;
   }
   

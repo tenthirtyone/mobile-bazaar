@@ -16,28 +16,26 @@
         state: 'profile',
         config: {
           url: '/profile',
-          controller: 'ProfileController',
-          controllerAs: "profile",
-          templateUrl: 'views/profile.template.html',
-              views: {
-                'about': {
-                  templateUrl: 'about.template.html',
-                  controller:  'AboutController'
-                },
-                'followers': {
-                  templateUrl: 'followers.template.html',
-                  controller:  'FollowersController'
-                },
-                'following': {
-                  templateUrl: 'following.template.html',
-                  controller:  'FollowingController'
-                },
-                'store': {
-                  templateUrl: 'store.template.html',
-                  controller:  'StoreController'
-                }
-        }
-      }
-    ];
-  }
+          views: {
+              '': {
+                templateUrl: 'views/profile.template.html',
+                controller: 'ProfileController',
+                controllerAs: 'profile',
+              },
+              'about@profile': {
+                templateUrl: 'views/about.template.html',
+                controller: 'AboutController',
+                controllerAs: 'about',
+                name: 'About',
+              },
+              'leftWidgetOne@profile': {
+                template: '<h2>One</2>',
+              },
+              'leftWidgetTwo@profile': {
+                template: '<h2>Two</2>',
+              },
+          }          
+          }
+      }];
+    }
 }());
