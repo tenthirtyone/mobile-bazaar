@@ -18,7 +18,24 @@
           url: '/profile',
           controller: 'ProfileController',
           controllerAs: "profile",
-          templateUrl: 'views/profile.template.html'
+          templateUrl: 'views/profile.template.html',
+              views: {
+                'about': {
+                  templateUrl: 'about.template.html',
+                  controller:  'AboutController'
+                },
+                'followers': {
+                  templateUrl: 'followers.template.html',
+                  controller:  'FollowersController'
+                },
+                'following': {
+                  templateUrl: 'following.template.html',
+                  controller:  'FollowingController'
+                },
+                'store': {
+                  templateUrl: 'store.template.html',
+                  controller:  'StoreController'
+                }
         }
       }
     ];
