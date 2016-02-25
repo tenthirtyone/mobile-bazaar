@@ -7,6 +7,7 @@
     'mobile-bazaar.following',
     'mobile-bazaar.profile',
     'mobile-bazaar.login',
+    'mobile-bazaar.mocks',
     'ngMaterial',
     'ui.router',
     'ngStorage'

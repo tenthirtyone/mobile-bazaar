@@ -5,6 +5,13 @@
   
 }());
 (function() {
+  "use strict";
+  
+  angular.module('mobile-bazaar.mocks', [
+    'ngMockE2E'
+  ]);
+}());
+(function() {
   'use strict';
   
   angular.module('mobile-bazaar.profile', [
@@ -24,13 +31,13 @@
 (function() {
   'use strict';
   
-  angular.module('mobile-bazaar.about', []);
+  angular.module('mobile-bazaar.followers', []);
   
 }());
 (function() {
   'use strict';
   
-  angular.module('mobile-bazaar.followers', []);
+  angular.module('mobile-bazaar.about', []);
   
 }());
 (function() {
@@ -54,6 +61,7 @@
     'mobile-bazaar.following',
     'mobile-bazaar.profile',
     'mobile-bazaar.login',
+    'mobile-bazaar.mocks',
     'ngMaterial',
     'ui.router',
     'ngStorage'
@@ -326,6 +334,33 @@
   
 }());
 (function() {
+  "use strict";
+  
+  angular.module('mobile-bazaar.mocks')
+  .run(mockAPI)
+  
+  mockAPI.$inject = ['$httpBackend'];
+  
+  function mockAPI($httpBackend) {
+        
+    $httpBackend.whenGET('http://localhost:28469/api/login').respond(function(){
+      return [200, {success: true}, {}];
+    })
+            
+    $httpBackend.whenGET('http://localhost:28469/api/login').respond(function(){
+      return [200, {success: true}, {}];
+    })
+    
+    $httpBackend.whenGET(/.*/).passThrough();
+    $httpBackend.whenPOST(/.*/).passThrough();
+    $httpBackend.whenDELETE(/.*/).passThrough();
+    $httpBackend.whenPUT(/.*/).passThrough();
+
+  }
+  
+  
+}());
+(function() {
   'use strict';
   
   angular.module('mobile-bazaar.profile')
@@ -456,6 +491,67 @@
 (function() {
   'use strict';
   
+  angular.module('mobile-bazaar.followers')
+  .controller('FollowersController', FollowersController);
+  
+  FollowersController.$inject = ['FollowersService'];
+  
+  function FollowersController(FollowersService) {
+    var vm = this;
+    vm.followers = getFollowers;
+    
+    init();
+    
+    function init() {
+      FollowersService.setFollowers();
+    }
+    
+    function getFollowers() {
+      return FollowersService.getFollowers();
+    }
+  
+     return vm;
+  }
+  
+}());
+(function() {
+  'use strict';
+  
+  angular.module('mobile-bazaar.followers')
+  .service('FollowersService', FollowersService);
+  
+  FollowersService.$inject = ['$http'];
+  
+  function FollowersService($http) {
+    var APIURL = 'http://localhost:28469/api/followers';
+    var followers = {};
+    
+    
+    return {
+      getFollowers: getFollowers,
+      setFollowers: setFollowers  
+    };
+      
+    function getFollowers() {
+      return following;
+    }    
+     
+    function setFollowers() {
+      $http.get(APIURL)
+      .then(function(res) {
+        followers = res.data.followers || {};
+      })
+      .catch(function(err){
+        console.log(err);
+      });
+    }
+    
+  }
+  
+}());
+(function() {
+  'use strict';
+  
   angular.module('mobile-bazaar.about')
   .controller('AboutController', AboutController);
   
@@ -510,67 +606,6 @@
       $http.get(APIURL)
       .then(function(res) {
         profile = res.data.profile || {};
-      })
-      .catch(function(err){
-        console.log(err);
-      });
-    }
-    
-  }
-  
-}());
-(function() {
-  'use strict';
-  
-  angular.module('mobile-bazaar.followers')
-  .controller('FollowersController', FollowersController);
-  
-  FollowersController.$inject = ['FollowersService'];
-  
-  function FollowersController(FollowersService) {
-    var vm = this;
-    vm.followers = getFollowers;
-    
-    init();
-    
-    function init() {
-      FollowersService.setFollowers();
-    }
-    
-    function getFollowers() {
-      return FollowersService.getFollowers();
-    }
-  
-     return vm;
-  }
-  
-}());
-(function() {
-  'use strict';
-  
-  angular.module('mobile-bazaar.followers')
-  .service('FollowersService', FollowersService);
-  
-  FollowersService.$inject = ['$http'];
-  
-  function FollowersService($http) {
-    var APIURL = 'http://localhost:28469/api/followers';
-    var followers = {};
-    
-    
-    return {
-      getFollowers: getFollowers,
-      setFollowers: setFollowers  
-    };
-      
-    function getFollowers() {
-      return following;
-    }    
-     
-    function setFollowers() {
-      $http.get(APIURL)
-      .then(function(res) {
-        followers = res.data.followers || {};
       })
       .catch(function(err){
         console.log(err);
