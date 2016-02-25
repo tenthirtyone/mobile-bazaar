@@ -16354,7 +16354,7 @@ body {
 
 
 .md-card-image {
-  max-width: 50%;
+  width: auto;
   margin-left: auto;
   margin-right: auto; }
 
