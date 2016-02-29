@@ -26,7 +26,7 @@
         followers = res.data.followers || {};
       })
       .catch(function(err){
-        console.log(err);
+        //console.log(err);
       });
     }
     

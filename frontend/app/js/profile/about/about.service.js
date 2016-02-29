@@ -8,38 +8,20 @@
   
   function AboutService($http) {
     var APIURL = 'http://localhost:28469/api/profile';
-    var profile = {};
     
-    
-    return {
-      getGUID: getGUID,    
-      getProfile: getProfile,
-      getWebsite: getWebsite,
-      setProfile: setProfile    
+    return { 
+      getProfile: getProfile 
     };
     
-    function getGUID() {
-      return profile.guid;
-    }    
-        
     function getProfile() {
-      return profile;
-    }    
-    
-    function getWebsite() {
-      return profile.website || 'No Website Defined';
-    }
-    
-    function setProfile() {
-      $http.get(APIURL)
+      return $http.get(APIURL)
       .then(function(res) {
-        profile = res.data.profile || {};
+        return res.data.profile;
       })
       .catch(function(err){
         console.log(err);
       });
-    }
-    
+    }        
   }
   
 }());

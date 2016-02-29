@@ -46,7 +46,7 @@ gulp.task('default', ['move', 'scss', 'scripts', 'views', 'vendor', 'images'], f
 });
 
 gulp.task('images', ['clean'], function() {
-  return gulp.src(['app/img/*.png', 'app/img/*.jpg', 'app/img/**/*svg'])
+  return gulp.src(['app/img/**/*'])
     .pipe(gulp.dest(buildDir + 'img/'))
 });
 
@@ -57,6 +57,10 @@ gulp.task('lint', function() {
 });
 
 gulp.task('move', ['clean'], function() {
+  gulp.src('app/favicon.png')
+    .pipe(gulp.dest(buildDir));
+  
+  
  return gulp.src('app/index.html')
   .pipe(htmlreplace(htmlReplaceStrings))
   .pipe(gulp.dest(buildDir));

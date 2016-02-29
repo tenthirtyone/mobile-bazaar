@@ -26,7 +26,7 @@
         following = res.data.following || {};
       })
       .catch(function(err){
-        console.log(err);
+        //console.log(err);
       });
     }
     

@@ -11,6 +11,7 @@
     'mobile-bazaar.about',
     'mobile-bazaar.followers',
     'mobile-bazaar.following',
+    'mobile-bazaar.settings',
     'mobile-bazaar.store'
   ]);
   
@@ -37,6 +38,12 @@
   'use strict';
   
   angular.module('mobile-bazaar.following', []);
+  
+}());
+(function() {
+  'use strict';
+  
+  angular.module('mobile-bazaar.settings', []);
   
 }());
 (function() {
@@ -195,19 +202,19 @@
   angular.module('mobile-bazaar')
     .factory('tokenInterceptor', tokenInterceptor);
        
-    tokenInterceptor.$inject = ['$sessionStorage'];
+    tokenInterceptor.$inject = ['$localStorage'];
   
-    function tokenInterceptor($sessionStorage) {  
+    function tokenInterceptor($localStorage) {  
       return {
           request: function(config) {
               if (!config.headers.Authorization){
-                config.headers.Authorization = $sessionStorage.token || '';
+                config.headers.Authorization = $localStorage.token || '';
               }
               return config;
           },
           response: function(response) {
             if(response.headers('Authorization')) {
-              $sessionStorage.token = response.headers('Authorization');
+              $localStorage.token = response.headers('Authorization');
             }
             return response;
           }
@@ -408,6 +415,13 @@
                 name: 'store',
                 isTab: true,
               },
+              'settings@profile': {
+                templateUrl: 'views/settings.template.html',
+                controller: 'SettingsController',
+                controllerAs: 'settings',
+                name: 'settings',
+                isTab: true,
+              },
           }          
           }
       }];
@@ -461,14 +475,25 @@
   
   AboutController.$inject = ['AboutService'];
   
-  function AboutController(AboutController) {
+  function AboutController(AboutService) {
     var vm = this;
+    vm.profile = {};
     
-    init();
-    
+    init();    
+  
     function init() {
-      
+      return getProfile().then(function() {
+        console.log('getting profile');
+      });
     }
+    
+    function getProfile() {
+        return AboutService.getProfile()
+            .then(function(data) {
+                vm.profile = data;
+                return vm.profile;
+            });
+    }    
     
      return vm;
   }
@@ -484,38 +509,20 @@
   
   function AboutService($http) {
     var APIURL = 'http://localhost:28469/api/profile';
-    var profile = {};
     
-    
-    return {
-      getGUID: getGUID,    
-      getProfile: getProfile,
-      getWebsite: getWebsite,
-      setProfile: setProfile    
+    return { 
+      getProfile: getProfile 
     };
     
-    function getGUID() {
-      return profile.guid;
-    }    
-        
     function getProfile() {
-      return profile;
-    }    
-    
-    function getWebsite() {
-      return profile.website || 'No Website Defined';
-    }
-    
-    function setProfile() {
-      $http.get(APIURL)
+      return $http.get(APIURL)
       .then(function(res) {
-        profile = res.data.profile || {};
+        return res.data.profile;
       })
       .catch(function(err){
         console.log(err);
       });
-    }
-    
+    }        
   }
   
 }());
@@ -573,7 +580,7 @@
         followers = res.data.followers || {};
       })
       .catch(function(err){
-        console.log(err);
+        //console.log(err);
       });
     }
     
@@ -634,10 +641,50 @@
         following = res.data.following || {};
       })
       .catch(function(err){
-        console.log(err);
+        //console.log(err);
       });
     }
     
+  }
+  
+}());
+(function() {
+  'use strict';
+  
+  angular.module('mobile-bazaar.settings')
+  .controller('SettingsController', SettingsController);
+  
+  SettingsController.$inject = ['SettingsService'];
+  
+  function SettingsController(SettingsService) {
+    var vm = this;
+    
+    init();
+    
+    function init() {
+      
+    }
+    
+     return vm;
+  }
+  
+}());
+(function() {
+  'use strict';
+  
+  angular.module('mobile-bazaar.about')
+  .service('SettingsService', SettingsService);
+  
+  SettingsService.$inject = ['$http'];
+  
+  function SettingsService($http) {
+    var APIURL = 'http://localhost:28469/api/profile';
+    var followers = {};
+    
+    return {
+     
+    };
+       
   }
   
 }());

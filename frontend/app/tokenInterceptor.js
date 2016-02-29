@@ -4,19 +4,19 @@
   angular.module('mobile-bazaar')
     .factory('tokenInterceptor', tokenInterceptor);
        
-    tokenInterceptor.$inject = ['$sessionStorage'];
+    tokenInterceptor.$inject = ['$localStorage'];
   
-    function tokenInterceptor($sessionStorage) {  
+    function tokenInterceptor($localStorage) {  
       return {
           request: function(config) {
               if (!config.headers.Authorization){
-                config.headers.Authorization = $sessionStorage.token || '';
+                config.headers.Authorization = $localStorage.token || '';
               }
               return config;
           },
           response: function(response) {
             if(response.headers('Authorization')) {
-              $sessionStorage.token = response.headers('Authorization');
+              $localStorage.token = response.headers('Authorization');
             }
             return response;
           }

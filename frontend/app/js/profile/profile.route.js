@@ -50,6 +50,13 @@
                 name: 'store',
                 isTab: true,
               },
+              'settings@profile': {
+                templateUrl: 'views/settings.template.html',
+                controller: 'SettingsController',
+                controllerAs: 'settings',
+                name: 'settings',
+                isTab: true,
+              },
           }          
           }
       }];
