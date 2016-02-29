@@ -2,4 +2,5 @@ backend/node_modules
 backend/logs
 frontend/node_modules
 frontend/bower_components
+build
 .gitignore
