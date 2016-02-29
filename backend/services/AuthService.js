@@ -28,7 +28,9 @@ function checkToken(userToken, callback) {
     return callback({success: false, msg: 'Auth failed, missing valid token'});
   }
   if (userToken === token) {
-    token = jwt.sign({ username: config.USERNAME }, config.SECRET_SEED);
+    //Enable this to exchange tokens each time
+    //FE will need requests changed to work properly.
+    //token = jwt.sign({ username: config.USERNAME }, config.SECRET_SEED);
     return callback(null, {success: true, token: token});
   } else {
     return callback({success: false, msg: 'Auth failed, missing valid token'});

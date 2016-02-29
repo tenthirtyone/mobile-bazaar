@@ -1,14 +1,10 @@
 <md-content class="md-padding">
   <md-list>
-    <md-list-item class="md-3-line">
+    <md-list-item class="md-3-line white" ng-repeat="user in following.following">
       <img src="img/smiley.png" class="md-avatar" >
       <div class="md-list-item-text" layout="column">
-        <h3>Who</h3>
-        <h4>What</h4>
-        <p>Notes</p>
-      </div>
-      <div>
-      <md-button class="md-raised">Unfollow</md-button>
+        <h3 style="color: #fff;">{{user.name}}</h3>
+        <h4 style="color: #fff;">{{user.short_description}}</h4>
       </div>
     </md-list-item>
     <md-divider ></md-divider>

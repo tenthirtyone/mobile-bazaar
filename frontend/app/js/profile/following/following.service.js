@@ -8,28 +8,20 @@
   
   function FollowingService($http) {
     var APIURL = 'http://localhost:28469/api/following';
-    var following = {};
-    
-    
+
     return {
-      getFollowing: getFollowing,
-      setFollowing: setFollowing  
+      getFollowing: getFollowing
     };
       
     function getFollowing() {
-      return following;
-    }    
-     
-    function setFollowing() {
-      $http.get(APIURL)
+      return $http.get(APIURL)
       .then(function(res) {
-        following = res.data.following || {};
+        return res.data.following;
       })
       .catch(function(err){
-        //console.log(err);
+        console.log(err);
       });
-    }
-    
+    }        
   }
   
 }());

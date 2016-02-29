@@ -8,17 +8,23 @@
   
   function FollowingController(FollowingService) {
     var vm = this;
-    vm.following = getFollowing;
+    vm.following = [];
     
     init();
     
     function init() {
-      FollowingService.setFollowing();
+      return getFollowing().then(function() {
+        console.log('getting following');
+      });
     }
     
     function getFollowing() {
-      return FollowingService.getFollowing();
-    }
+        return FollowingService.getFollowing()
+            .then(function(data) {
+                vm.following = data;
+                return vm.following;
+            });
+    }    
   
      return vm;
   }

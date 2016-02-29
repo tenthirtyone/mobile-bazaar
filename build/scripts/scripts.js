@@ -1,6 +1,12 @@
 (function() {
   'use strict';
   
+  angular.module('mobile-bazaar.images', []);
+  
+}());
+(function() {
+  'use strict';
+  
   angular.module('mobile-bazaar.login', []);
   
 }());
@@ -66,6 +72,7 @@
     'mobile-bazaar.directives',
     'mobile-bazaar.followers',
     'mobile-bazaar.following',
+    'mobile-bazaar.images',
     'mobile-bazaar.profile',
     'mobile-bazaar.login',
     //'mobile-bazaar.mocks',
@@ -82,6 +89,43 @@
         'Content-Type': 'application/json'
     };     
   }]);    
+}());
+(function() {
+  'use strict';
+  
+  angular.module('mobile-bazaar.images')
+  .service('ImageService', ImageService);
+  
+  ImageService.$inject = ['$http'];
+  
+  function ImageService($http) {
+    var login = true;
+    var APIURL = 'http://localhost:28469/api/image';
+    var loginError = false;
+    var loginErrorMsg = '';
+
+    return {
+      getImage: getImage
+    };
+    
+    function getImage(guid, hash) {
+      $http.get(APIURL, 
+               {headers : {'Authorization': 'Basic ' + 
+                btoa(credentials.username + ':' + credentials.password)}})
+      .then(function(res) {
+        $state.go('profile');
+        loginError = false;
+        loginErrorMsg = '';
+      }) 
+      .catch(function(err) {
+        //log
+        loginError = true;
+        loginErrorMsg = err.data.error.msg || 'Auth Failed';
+      });
+    }
+    
+  }
+  
 }());
 (function() {
   'use strict';
@@ -643,17 +687,23 @@
   
   function FollowingController(FollowingService) {
     var vm = this;
-    vm.following = getFollowing;
+    vm.following = [];
     
     init();
     
     function init() {
-      FollowingService.setFollowing();
+      return getFollowing().then(function() {
+        console.log('getting following');
+      });
     }
     
     function getFollowing() {
-      return FollowingService.getFollowing();
-    }
+        return FollowingService.getFollowing()
+            .then(function(data) {
+                vm.following = data;
+                return vm.following;
+            });
+    }    
   
      return vm;
   }
@@ -669,28 +719,20 @@
   
   function FollowingService($http) {
     var APIURL = 'http://localhost:28469/api/following';
-    var following = {};
-    
-    
+
     return {
-      getFollowing: getFollowing,
-      setFollowing: setFollowing  
+      getFollowing: getFollowing
     };
       
     function getFollowing() {
-      return following;
-    }    
-     
-    function setFollowing() {
-      $http.get(APIURL)
+      return $http.get(APIURL)
       .then(function(res) {
-        following = res.data.following || {};
+        return res.data.following;
       })
       .catch(function(err){
-        //console.log(err);
+        console.log(err);
       });
-    }
-    
+    }        
   }
   
 }());

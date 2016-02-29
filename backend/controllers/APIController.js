@@ -3,6 +3,7 @@ var config = require("config");
 var async = require("async");
 var router = express.Router();
 var AuthService = require("../services/AuthService.js");
+var ImageService = require("../services/ImageService.js");
 var FollowingService = require("../services/FollowingService.js");
 var ProfService = require("../services/ProfileService.js");
 
@@ -38,6 +39,35 @@ router.get("/following", function(req, res) {
   });
 });
 
+router.get("/image", function(req, res) {
+  async.waterfall([
+    function validateToken(callback) {
+      AuthService.checkToken(req.headers.authorization, function(err, token) {
+        if (err) {
+          return callback({error: err});
+        }
+        return callback(null, token);
+      });
+    },
+    function(token, callback) {
+      ImageService.getImage(function(err, image){
+        if (err) {
+          return callback(err);
+        }  
+          return callback(null, token, image);
+      });      
+    }], function(err, token, image) {
+      if (err) {
+        res.status(404).json({error: err});
+      } else {
+        res.header({
+          "Authorization": token.token
+        });
+        res.send({image: image.image});        
+      }
+  });  
+})
+
 router.get("/login", function(req, res) {
   AuthService.login(req.headers.authorization, function(err, token, result) {
     if (err) {
@@ -49,19 +79,6 @@ router.get("/login", function(req, res) {
       res.send(result);  
     };
   })
-});
-
-router.get("/ping", function(req, res) {
-  AuthService.checkToken(req.headers.token, function(err, token) {
-    if (err) {
-      res.status(401).send({error: err});
-    } else {
-      res.header({
-        "token": token.token
-      });
-        res.send({success: true});  
-    }
-  });
 });
 
 router.get("/profile", function(req, res) {
@@ -91,16 +108,6 @@ router.get("/profile", function(req, res) {
         res.send({profile: profile.profile});        
       }
   });
-});
-
-router.post("/test/token", function(req, res) {
-  AuthService.checkToken(req.headers.token, function(err, token) {
-    if (err) {
-      res.status(404).json({error: err});
-    } else {
-      res.send(token);  
-    }
-  })
 });
 
 router.post("/test", function(req, res) {
