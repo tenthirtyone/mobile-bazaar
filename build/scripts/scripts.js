@@ -68,7 +68,7 @@
     'mobile-bazaar.following',
     'mobile-bazaar.profile',
     'mobile-bazaar.login',
-    'mobile-bazaar.mocks',
+    //'mobile-bazaar.mocks',
     'ngMaterial',
     'ui.router',
     'ngStorage'
@@ -84,76 +84,6 @@
   }]);    
 }());
 (function() {
-<<<<<<< HEAD
-  // Modified version of John Papa's Router Helper
-  // https://github.com/johnpapa/angular-styleguide
-  
-  angular
-    .module('mobile-bazaar')
-    .provider('routerHelper', routerHelperProvider);
-
-  routerHelperProvider.$inject = ['$locationProvider', '$stateProvider', '$urlRouterProvider'];
-
-  function routerHelperProvider($locationProvider, $stateProvider, $urlRouterProvider) {
-
-      this.$get = RouterHelper;
-
-      $locationProvider.html5Mode(false);
-
-      RouterHelper.$inject = ['$state'];
-
-      function RouterHelper($state) {
-          var service = {
-            configureStates: configureStates,
-            getStates: getStates
-          };
-
-          return service;
-
-          function configureStates(states, otherwisePath) {
-            states.forEach(function(state) {
-                $stateProvider.state(state.state, state.config);
-            });
-            $urlRouterProvider.otherwise("login");
-          }
-
-          function getStates() { return $state.get(); }
-      }
-  }
-}());
-(function() {
-  "use strict";
-  
-  angular.module('mobile-bazaar')
-    .factory('tokenInterceptor', tokenInterceptor);
-       
-    tokenInterceptor.$inject = ['$localStorage'];
-  
-    function tokenInterceptor($localStorage) {  
-      return {
-          request: function(config) {
-              if (!config.headers.Authorization){
-                config.headers.Authorization = $localStorage.token || '';
-              }
-              return config;
-          },
-          response: function(response) {
-            if(response.headers('Authorization')) {
-              $localStorage.token = response.headers('Authorization');
-            }
-            return response;
-          }
-      };
-  }
-  
-  angular.module('mobile-bazaar')
-    .config(['$httpProvider', function($httpProvider) {  
-      $httpProvider.interceptors.push('tokenInterceptor');
-  }]);
-}());
-(function() {
-=======
->>>>>>> 58f99511332c1c0c9f775f62b8743a9fdc775d8c
   'use strict';
   
   angular.module('mobile-bazaar.login')
@@ -532,19 +462,19 @@
   angular.module('mobile-bazaar')
     .factory('tokenInterceptor', tokenInterceptor);
        
-    tokenInterceptor.$inject = ['$sessionStorage'];
+    tokenInterceptor.$inject = ['$localStorage'];
   
-    function tokenInterceptor($sessionStorage) {  
+    function tokenInterceptor($localStorage) {  
       return {
           request: function(config) {
               if (!config.headers.Authorization){
-                config.headers.Authorization = $sessionStorage.token || '';
+                config.headers.Authorization = $localStorage.token || '';
               }
               return config;
           },
           response: function(response) {
             if(response.headers('Authorization')) {
-              $sessionStorage.token = response.headers('Authorization');
+              $localStorage.token = response.headers('Authorization');
             }
             return response;
           }
