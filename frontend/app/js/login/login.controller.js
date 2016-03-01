@@ -17,7 +17,7 @@
     vm.login = getLogin;
     vm.loginErrorMsg = getErrorMsg;
     vm.isLoginError = isLoginError;
-    
+
     function getErrorMsg() {
       return LoginService.getErrorMsg();
     }
