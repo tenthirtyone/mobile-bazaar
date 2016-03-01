@@ -28,6 +28,7 @@ var vendorFiles = [
   'bower_components/angular-aria/angular-aria.js',
   'bower_components/angular-messages/angular-messages.js',
   'bower_components/angular-material/angular-material.js',
+  'bower_components/angular-material-icons/angular-material-icons.js',
   'bower_components/angular-mocks/angular-mocks.js',
   'bower_components/ngstorage/ngStorage.js'
 ];

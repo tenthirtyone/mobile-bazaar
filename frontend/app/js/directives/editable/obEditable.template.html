@@ -1,0 +1,19 @@
+<md-input-container>
+  <label style="color: #fff;">Website</label>
+  <input ng-model="vm.data" value="vm.data" style="color: #fff;" ng-enter-key="vm.saveData()" >
+  <div ng-show="vm.showSave">
+    <div style="color: #fff; font-size: 75%;">Saved!</div>
+  </div>
+</md-input-container>
+
+
+<!--
+<div ng-show="editing">
+  <input type="text" value="{{vm.data}}" ng-model="vm.data" style="margin: 0; padding: 0;">
+  <md-button class="md-fab md-mini md-primary" aria-label="OK" ng-click="editing = !editing">
+    <ng-md-icon icon="check"></ng-md-icon>
+  </md-button>
+</div>
+<div ng-show="!editing" ng-model="vm.data" ng-click="editing = !editing">
+  {{vm.data}}
+</div>-->

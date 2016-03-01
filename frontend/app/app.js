@@ -10,6 +10,7 @@
     'mobile-bazaar.login',
     'mobile-bazaar.mocks',
     'ngMaterial',
+    'ngMdIcons',
     'ui.router',
     'ngStorage'
   ]);
