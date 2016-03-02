@@ -10,7 +10,7 @@
       restrict: 'EA',
       templateUrl: 'views/obEditable.template.html',
       scope: {
-          data: '='
+          data: '@'
       },
       controller: DirectiveController,
       controllerAs: 'vm',
@@ -28,8 +28,15 @@
 
   function DirectiveController($timeout) {
     var vm = this;
-    vm.editing = false;
-    vm.showSave = false
+    vm.editing = false;    
+    
+    vm.hideButtons = function() {
+      vm.editing = false;
+    }
+    
+    vm.showButtons = function() {
+      vm.editing = true;
+    }
     
     vm.saveData = function() {
       if (vm.showSave === false) {
