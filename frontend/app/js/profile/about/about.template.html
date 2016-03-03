@@ -1,46 +1,18 @@
+<div class="avatar-image">
+<img src="img/avatar1.jpeg" class="md-avatar profile-avatar" alt="avatar" />
+</div>
 <md-list>
   <md-list-item class="md-2-line">
-  <img src="img/avatar1.jpeg" class="md-avatar profile-avatar" alt="avatar" />
     <div class="md-list-item-text">
       <h3>{{about.profile.name}}</h3>
       <p>{{about.profile.guid}}</p>
       <p>{{about.profile.location}}</p>
     </div>
   </md-list-item>
-  <md-divider ></md-divider>
-  <md-list-item class="md-2-line">
-    <div class="md-list-item-text">
-      <h3>Website</h3>
-      <input type="text" value="{{about.profile.header_hash}}">
-    </div>
-  </md-list-item>
-  <md-divider ></md-divider>
-  <md-list-item class="md-2-line">
-    <div class="md-list-item-text">
-      <h3>Email</h3>
-      <p>{{about.profile.email}}</p>
-    </div>
-  </md-list-item>
-  <md-divider ></md-divider>
-  <md-list-item class="md-2-line">
-    <div class="md-list-item-text">
-      <h3>Facebook</h3>
-      <p>{{about.website}}</p>
-    </div>
-  </md-list-item>
-  <md-divider ></md-divider>
-  <md-list-item class="md-2-line">
-    <div class="md-list-item-text">
-      <h3>Twitter</h3>
-      <p>{{about.website}}</p>
-    </div>
-  </md-list-item>
-  <md-divider ></md-divider>
-  <md-list-item class="md-2-line">
-    <div class="md-list-item-text">
-      <h3>Instagram</h3>
-      <p>{{about.website}}</p>
-    </div>
-  </md-list-item>
-  <md-divider ></md-divider>
 </md-list>
+<md-divider ></md-divider>
+<ob-editable heading="Website" data="about.profile.website"></ob-editable>  
+<ob-editable heading="Email" data="about.profile.email"></ob-editable>
+<ob-editable heading="Facebook" data="about.profile.social_accounts.facebook.username"></ob-editable>
+<ob-editable heading="Twitter" data="about.profile.social_accounts.twitter.username"></ob-editable>
+<ob-editable heading="Instagram" data="about.profile.social_accounts.instagram.username"></ob-editable>

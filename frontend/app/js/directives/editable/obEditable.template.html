@@ -1,19 +1,10 @@
 <md-input-container>
-  <label style="color: #fff;">Website</label>
-  <input ng-model="vm.data" value="vm.data" style="color: #fff;" ng-enter-key="vm.saveData()" >
-  <div ng-show="vm.showSave">
-    <div style="color: #fff; font-size: 75%;">Saved!</div>
-  </div>
+  <label style="color: #fff;">{{vm.heading}}</label>
+  <input id="{{vm.heading}} " ng-model="vm.data" value="vm.data" style="color: #fff;" ng-enter-key="vm.saveData()" ng-disabled="!vm.editMode">
+  
+  <md-button class="md-raised md-primary" ng-click="vm.editOn()" ng-show="!vm.editMode">Edit</md-button>
+  <md-button class="md-raised md-primary" ng-click="vm.saveData()" ng-show="vm.editMode">Save</md-button>
+  <md-button class="md-raised md-warn" ng-click="vm.editCancel()" ng-show="vm.editMode">Cancel</md-button>
+  
 </md-input-container>
-
-
-<!--
-<div ng-show="editing">
-  <input type="text" value="{{vm.data}}" ng-model="vm.data" style="margin: 0; padding: 0;">
-  <md-button class="md-fab md-mini md-primary" aria-label="OK" ng-click="editing = !editing">
-    <ng-md-icon icon="check"></ng-md-icon>
-  </md-button>
-</div>
-<div ng-show="!editing" ng-model="vm.data" ng-click="editing = !editing">
-  {{vm.data}}
-</div>-->
+<md-divider></md-divider>

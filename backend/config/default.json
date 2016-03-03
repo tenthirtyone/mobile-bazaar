@@ -5,6 +5,6 @@
   "SECRET_SEED": "sneakysquirrels--replaceme--",
   "USERNAME": "test",
   "PASSWORD": "test",
-  "OBUSERNAME": "test",
-  "OBPASSWORD": "test"
+  "OBUSERNAME": "username",
+  "OBPASSWORD": "password"
 }
