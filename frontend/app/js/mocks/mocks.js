@@ -113,30 +113,47 @@
     
     var mockProfile = {
       "profile": {
-        "website": "http://www.openbazaar.org", 
-        "about": "drwasho's store", 
-        "guid": "375ead0967e63b6cec49f28d3be8731b20f081db", 
-        "vendor": true, 
-        "name": "drwasho", 
-        "text_color": 16777215, 
-        "social_accounts": {}, 
-        "header_hash": "7de0c4aab5929ad7c413175ec9dd2ae1476e19b9", 
-        "encryption_key": "0374e542b2faa53d40b43f36c722d9f40cbf40dd11da3afb6508010a8b228126", 
-        "secondary_color": 3243448, 
-        "moderator": true, 
-        "moderator_list": [
-            ""
-        ], 
-        "pgp_key": "", 
-        "nsfw": false, 
-        "location": "UNITED_STATES", 
-        "avatar_hash": "", 
-        "handle": "", 
-        "primary_color": 551582, 
-        "background_color": 407379, 
-        "email": ""
-        }
+        "social_accounts": {
+          "twitter": {
+            "username": "TestTwitter",
+            "proof_url": ""
+          },
+          "facebook": {
+            "username": "test Facebook",
+            "proof_url": ""
+          },
+          "instagram": {
+            "username": "Testagram",
+            "proof_url": ""
+          },
+          "snapchat": {
+            "username": "Testchat",
+            "proof_url": ""
+          }
+        },
+        "moderation_fee": 0.5,
+        "moderator": true,
+        "nsfw": true,
+        "handle": "",
+        "guid": "91753abd80bc3c3f38dc2e84c027bd742e896e74",
+        "background_color": 6176310,
+        "secondary_color": 13389899,
+        "location": "UNITED_STATES",
+        "short_description": "Saying something interesting",
+        "primary_color": 12208703,
+        "header_hash": "9062b52ff57fdcfce486915cfa0d15128c56ae45",
+        "website": "https://github.com/tenthirtyone/mobile-bazaar",
+        "vendor": false,
+        "text_color": 16777215,
+        "public_key": "d4164d25c274e8da50edd8d4f2e0814051592cedb7ba1f5103ab3c9efff8f663",
+        "about": "<p>This is my nifty about section<\/p>",
+        "name": "Mobile Bazaar Test Shop",
+        "email": "no@email.com",
+        "pgp_key": "",
+        "temp_handle": "@tenthirtyone",
+        "avatar_hash": "770d2f23750c41c6682f38aa260940db02fff81c"
       }
+    }
     
     var mockSales = [{
       "status": 0,

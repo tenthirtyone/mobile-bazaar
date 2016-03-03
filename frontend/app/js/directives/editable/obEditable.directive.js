@@ -29,9 +29,11 @@
 
   function DirectiveController($window) {
     var vm = this;
-    vm.editing = false;    
+    var tempVal = '';
     
-    vm.hideButtons = function() {
+    vm.editMode = false;    
+    
+    vm.editOff = function() {
       vm.editing = false;
     }
     
@@ -44,9 +46,14 @@
       }
     }
     
-    vm.showButtons = function() {
-      vm.editing = true;
+    vm.editOn = function() {
+      vm.editMode = true;
       vm.setFocus();
+    }
+    
+    vm.saveData = function() {
+      //Make Service Call
+      vm.editOff();
     }
     
   }
