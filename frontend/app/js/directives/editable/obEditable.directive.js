@@ -34,15 +34,18 @@
     vm.editMode = false;    
     
     vm.editCancel = function() {
-      vm.editing = false;
+      console.log('editCancel');
+      vm.editMode = false;
       vm.data = tempVal;
     }    
     
     vm.editOff = function() {
-      vm.editing = false;
+      console.log('editOff');
+      vm.editMode = false;
     }
     
     vm.editOn = function() {
+      console.log('editOn');
       tempVal = vm.data;
       vm.editMode = true;
       vm.setFocus();
