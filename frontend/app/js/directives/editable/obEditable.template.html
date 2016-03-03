@@ -1,6 +1,6 @@
 <md-input-container>
-  <label style="color: #fff;">Website</label>
-  <input ng-model="vm.data" value="vm.data" style="color: #fff;" ng-enter-key="vm.saveData()" ng-disabled="!vm.editing">
+  <label style="color: #fff;">{{vm.heading}}</label>
+  <input id="{{vm.heading}} " ng-model="vm.data" value="vm.data" style="color: #fff;" ng-enter-key="vm.saveData()" ng-disabled="!vm.editing">
   
   <md-button class="md-raised md-primary" ng-click="vm.showButtons()" ng-show="!vm.editing">Edit</md-button>
   <md-button class="md-raised md-primary" ng-click="vm.hideButtons()" ng-show="vm.editing">Save</md-button>

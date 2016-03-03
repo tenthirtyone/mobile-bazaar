@@ -113,7 +113,7 @@
     
     var mockProfile = {
       "profile": {
-        "website": "", 
+        "website": "http://www.openbazaar.org", 
         "about": "drwasho's store", 
         "guid": "375ead0967e63b6cec49f28d3be8731b20f081db", 
         "vendor": true, 

@@ -10,7 +10,8 @@
       restrict: 'EA',
       templateUrl: 'views/obEditable.template.html',
       scope: {
-          data: '@'
+          heading: '@',
+          data: '=',
       },
       controller: DirectiveController,
       controllerAs: 'vm',
@@ -26,7 +27,7 @@
     }
   }
 
-  function DirectiveController($timeout) {
+  function DirectiveController($window) {
     var vm = this;
     vm.editing = false;    
     
@@ -34,18 +35,19 @@
       vm.editing = false;
     }
     
-    vm.showButtons = function() {
-      vm.editing = true;
-    }
-    
-    vm.saveData = function() {
-      if (vm.showSave === false) {
-        vm.showSave = true;
-        $timeout(function() {
-          console.log('timeout called');
-            vm.showSave = false;      
-        }, 2000);
+    vm.setFocus = function() {
+      //var el = $window.document.getElementById(vm.heading);
+      var el = angular.element(document.querySelector('#' + vm.heading));
+      console.log(el[0]);
+      if (el) {
+        el[0].focus();
       }
     }
+    
+    vm.showButtons = function() {
+      vm.editing = true;
+      vm.setFocus();
+    }
+    
   }
 }());
