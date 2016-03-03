@@ -27,7 +27,7 @@
     }
   }
 
-  function DirectiveController($window) {
+  function DirectiveController($window, $timeout) {
     var vm = this;
     var tempVal = '';
     
@@ -57,10 +57,16 @@
     vm.setFocus = function() {
       //var el = $window.document.getElementById(vm.heading);
       var el = angular.element(document.querySelector('#' + vm.heading));
-      console.log(el[0]);
-      if (el) {
+
+      $timeout(function() {
+        if (el) {
         el[0].focus();
-      }
+        el[0].select();
+        }
+      });
+      
+      
+
     }
     
     
