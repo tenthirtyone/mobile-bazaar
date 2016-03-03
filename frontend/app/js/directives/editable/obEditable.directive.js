@@ -33,8 +33,24 @@
     
     vm.editMode = false;    
     
+    vm.editCancel = function() {
+      vm.editing = false;
+      vm.data = tempVal;
+    }    
+    
     vm.editOff = function() {
       vm.editing = false;
+    }
+    
+    vm.editOn = function() {
+      tempVal = vm.data;
+      vm.editMode = true;
+      vm.setFocus();
+    }
+    
+    vm.saveData = function() {
+      //Make Service Call
+      vm.editOff();
     }
     
     vm.setFocus = function() {
@@ -46,15 +62,6 @@
       }
     }
     
-    vm.editOn = function() {
-      vm.editMode = true;
-      vm.setFocus();
-    }
-    
-    vm.saveData = function() {
-      //Make Service Call
-      vm.editOff();
-    }
     
   }
 }());
