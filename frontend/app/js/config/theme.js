@@ -88,7 +88,7 @@
                           customBackground);
 
      $mdThemingProvider.theme('default')
-         .primaryPalette('customPrimary')
+         .primaryPalette('customPrimary');
          
     
   }]);    

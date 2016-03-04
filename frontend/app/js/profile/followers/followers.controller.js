@@ -8,17 +8,23 @@
   
   function FollowersController(FollowersService) {
     var vm = this;
-    vm.followers = getFollowers;
+    vm.followers = [];
     
     init();
     
     function init() {
-      FollowersService.setFollowers();
+      return getFollowers().then(function() {
+        console.log('getting followers');
+      });
     }
     
     function getFollowers() {
-      return FollowersService.getFollowers();
-    }
+        return FollowersService.getFollowers()
+            .then(function(data) {
+                vm.followers = data;
+                return vm.followers;
+            });
+    }    
   
      return vm;
   }
