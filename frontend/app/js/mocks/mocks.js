@@ -2,7 +2,7 @@
   "use strict";
   
   angular.module('mobile-bazaar.mocks')
-  .run(mockAPI)
+  .run(mockAPI);
   
   mockAPI.$inject = ['$httpBackend'];
   
@@ -70,7 +70,7 @@
           }
         }
       }
-    }
+    };
     
     var mockFollowers = {
     "followers": [
@@ -89,7 +89,7 @@
             "nsfw": false
           }
         ]
-      }
+      };
     
     var mockFollowing = {
         "following": [
@@ -108,7 +108,7 @@
           "nsfw": false
         }
       ]
-    }
+    };
     
     
     var mockProfile = {
@@ -153,7 +153,7 @@
         "temp_handle": "@tenthirtyone",
         "avatar_hash": "770d2f23750c41c6682f38aa260940db02fff81c"
       }
-    }
+    };
     
     var mockSales = [{
       "status": 0,
@@ -165,7 +165,7 @@
       "btc_total": 0.002,
       "contract_type": "physical good",
       "thumbnail_hash": "cf344e4dc1eb9c38aff103c18116cd15754ad30f"
-    }]
+    }];
     
     var mockSettings = {
       "blocked_guids": [""],
@@ -181,32 +181,32 @@
       "time_zone": "10",
       "libbitcoin_server": "",
       "currency_code": "BTC"
-    }
+    };
     
     
     $httpBackend.whenGET('http://localhost:28469/api/contracts').respond(function(){
       return [200, {success: true}, {"token": "testToken"}];
-    })
+    });
            
     $httpBackend.whenGET('http://localhost:28469/api/login').respond(function(){
       return [200, {success: true}, {"token": "testToken"}];
-    })
+    });
             
     $httpBackend.whenGET('http://localhost:28469/api/followers').respond(function(){
       return [200, mockFollowers, {}];
-    })   
+    });   
          
     $httpBackend.whenGET('http://localhost:28469/api/following').respond(function(){
       return [200, mockFollowing, {}];
-    })   
+    });   
     
     $httpBackend.whenGET('http://localhost:28469/api/profile').respond(function(){
       return [200, mockProfile, {}];
-    })
+    });
     
     $httpBackend.whenGET('http://localhost:28469/api/settings').respond(function(){
-      return [200, mockProfile, {}];
-    })
+      return [200, mockSettings, {}];
+    });
     
     $httpBackend.whenGET(/.*/).passThrough();
     $httpBackend.whenPOST(/.*/).passThrough();

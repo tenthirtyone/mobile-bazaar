@@ -1,1 +1,3 @@
-<h2>Settings</h2>
+<div ng-repeat="(setting, value) in settings.settings">
+  <ob-editable heading="{{setting}}" data="value"></ob-editable>  
+</div>

@@ -58,6 +58,9 @@
       //var el = $window.document.getElementById(vm.heading);
       var el = angular.element(document.querySelector('#' + vm.heading));
 
+      //This is kind of an angular/JS limitation.
+      //The DOM won't update until after the function is run
+      //so I need an async function 
       $timeout(function() {
         if (el) {
         el[0].focus();

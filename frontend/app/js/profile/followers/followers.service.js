@@ -8,28 +8,20 @@
   
   function FollowersService($http) {
     var APIURL = 'http://localhost:28469/api/followers';
-    var followers = {};
-    
-    
+
     return {
-      getFollowers: getFollowers,
-      setFollowers: setFollowers  
+      getFollowers: getFollowers
     };
       
     function getFollowers() {
-      return following;
-    }    
-     
-    function setFollowers() {
-      $http.get(APIURL)
+      return $http.get(APIURL)
       .then(function(res) {
-        followers = res.data.followers || {};
+        return res.data.followers;
       })
       .catch(function(err){
-        //console.log(err);
+        console.log(err);
       });
-    }
-    
+    }        
   }
   
 }());

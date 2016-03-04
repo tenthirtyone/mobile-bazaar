@@ -2,7 +2,7 @@
   <label style="color: #fff;">{{vm.heading}}</label>
   <input id="{{vm.heading}} " ng-model="vm.data" value="vm.data" style="color: #fff;" ng-enter-key="vm.saveData()" ng-disabled="!vm.editMode">
   
-  <md-button class="md-raised md-primary" ng-click="vm.editOn()" ng-show="!vm.editMode">Edit</md-button>
+  <md-button class="md-raised md-primary editable-button" ng-click="vm.editOn()" ng-show="!vm.editMode">Edit</md-button>
   <md-button class="md-raised md-primary" ng-click="vm.saveData()" ng-show="vm.editMode">Save</md-button>
   <md-button class="md-raised md-warn" ng-click="vm.editCancel()" ng-show="vm.editMode">Cancel</md-button>
   
