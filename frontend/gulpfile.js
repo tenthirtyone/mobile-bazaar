@@ -33,6 +33,12 @@ var vendorFiles = [
   'bower_components/ngstorage/ngStorage.js'
 ];
 
+var vendorCSS = [
+  'bower_components/angular-material/angular-material.css',
+  'bower_components/angular-material.layouts/angular-material.layouts.css',
+  'bower_components/angular-material-icons/angular-material-icons.css'
+]
+
 gulp.task('browse', function(){
   gulp.src('localhost')
     .pipe(open({app: browser}));
@@ -71,10 +77,10 @@ gulp.task('move', ['clean'], function() {
 gulp.task('scss', ['clean'], function() {
   gulp.src('app/**/*.scss')
     .pipe(scss())
-    .pipe(gulp.dest('app/styles/'))
+    .pipe(gulp.dest('app/styles/tmp/'))
   
-  gulp.src('app/**/*.css')
-    .pipe(concat('styles.css'))
+  gulp.src(vendorCSS)
+    .pipe(concat('vendor-styles.css'))
     .pipe(gulp.dest(buildDir + 'styles/'))
 })
 
