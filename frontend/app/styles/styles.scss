@@ -28,3 +28,7 @@ md-content {
   background-color: #063753;
   color: #ffffff;
 }
+
+md-input-container:not(.md-input-invalid).md-input-has-value label {
+  color: #fff;
+}
