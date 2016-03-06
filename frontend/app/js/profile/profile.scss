@@ -46,3 +46,11 @@ md-list md-list-item.md-2-line .md-list-item-text h3,
 md-list md-list-item.md-2-line .md-list-item-text p{
   color: #fff;
 }
+
+.md-button.md-fab ng-md-icon {
+  fill: #fff;
+}
+
+.md-button.md-primary.md-fab:not([disabled]):hover {
+  background-color: rgba(33,81,117, .4);
+}

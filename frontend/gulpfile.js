@@ -77,7 +77,12 @@ gulp.task('move', ['clean'], function() {
 gulp.task('scss', ['clean'], function() {
   gulp.src('app/**/*.scss')
     .pipe(scss())
-    .pipe(gulp.dest('app/styles/tmp/'))
+    .pipe(concat('styles.css'))
+    .pipe(gulp.dest(buildDir + 'styles/'))
+  
+  gulp.src(vendorCSS)
+    .pipe(concat('vendor-styles.css'))
+    .pipe(gulp.dest(buildDir + 'styles/'))
   
   gulp.src(vendorCSS)
     .pipe(concat('vendor-styles.css'))
