@@ -22,6 +22,13 @@
                 controller: 'ProfileController',
                 controllerAs: 'profile',
               },
+              'store@profile': {
+                templateUrl: 'views/store.template.html',
+                controller: 'StoreController',
+                controllerAs: 'store',
+                name: 'store',
+                isTab: true,
+              },
               'about@profile': {
                 templateUrl: 'views/about.template.html',
                 controller: 'AboutController',
@@ -41,13 +48,6 @@
                 controller: 'FollowersController',
                 controllerAs: 'followers',
                 name: 'followers',
-                isTab: true,
-              },
-              'store@profile': {
-                templateUrl: 'views/store.template.html',
-                controller: 'StoreController',
-                controllerAs: 'store',
-                name: 'store',
                 isTab: true,
               },
               'settings@profile': {
