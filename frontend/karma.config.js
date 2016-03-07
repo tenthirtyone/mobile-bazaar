@@ -16,11 +16,17 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       'test-main.js',
-      {pattern: 'app/test/**.*.spec.js', included: false},
-      {pattern: 'app/test/**.*.spec.js', included: false},
-      {pattern: 'app/test/**/*.spec.js', included: false},
-      {pattern: 'app/test/**/*.spec.js', included: false},
-      {pattern: 'app/tests/**/*.spec.js', included: false}
+      'bower_components/angular/angular.js',
+      'bower_components/angular-ui-router/release/angular-ui-router.js',
+      'bower_components/angular-animate/angular-animate.js',
+      'bower_components/angular-aria/angular-aria.js',
+      'bower_components/angular-messages/angular-messages.js',
+      'bower_components/angular-material/angular-material.js',
+      'bower_components/angular-material-icons/angular-material-icons.js',
+      'bower_components/angular-mocks/angular-mocks.js',
+      'bower_components/ngstorage/ngStorage.js',
+      'app/**/*.js',
+      {pattern: 'app/tests/**/*.spec.js', included: true}
     ],
 
 
