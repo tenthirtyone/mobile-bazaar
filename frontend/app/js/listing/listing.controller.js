@@ -9,6 +9,9 @@
   function ListingController(ListingService) {
     var vm = this;
     
+    vm.categories = [];
+    vm.discoverTags = [];
+    
     vm.types = [
       'Physical Item',
       'Digital Item',

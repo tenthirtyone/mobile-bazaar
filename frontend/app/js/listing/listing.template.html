@@ -1,6 +1,6 @@
 <md-content>
 
-<h2>About</h2>
+<h3>About</h3>
   
 <md-input-container class="md-block" flex-gt-sm>
   <label>Title</label>
@@ -41,7 +41,7 @@
   <input ng-model="listing.sku">
 </md-input-container>  
   
-<h2>Shipping</h2>
+<h3>Shipping</h3>
 
   <md-input-container class="md-block" flex-gt-sm>
   <label>Processing Time</label>
@@ -79,14 +79,21 @@ Ships to []<br>
   <input ng-model="listing.internationalShipTime" placeholder="7-15 Days">
 </md-input-container>   
 
-<h2>Categorization (Optional)</h2>
-Categories[]
+<h3>Categorization (Optional)</h3>
+<md-chips ng-model="listing.categories"></md-chips>
 
-<h2>Discover (Optional)</h2>
-Tags []
+<h3>Discover Tags (Optional)</h3>
+<md-chips ng-model="listing.discoverTags"></md-chips>
 
-<ob-editable heading="Terms and Conditions (Optional)" data="listing.toc"></ob-editable>  
-<ob-editable heading="Return Policy (Optional)" data="listing.returnPolicy"></ob-editable>  
+<md-input-container class="md-block">
+  <label>Terms and Conditions</label>
+  <textarea ng-model="listing.terms" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+</md-input-container>
+
+<md-input-container class="md-block">
+  <label>Terms and Conditions</label>
+  <textarea ng-model="listing.returnPolicy" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+</md-input-container>
 
 <h2>Expiration (Optional)</h2>
 <md-datepicker ng-model="user.submissionDate" md-placeholder="Enter date">
