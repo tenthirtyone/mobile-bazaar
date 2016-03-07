@@ -6,13 +6,14 @@
     'mobile-bazaar.followers',
     'mobile-bazaar.following',
     'mobile-bazaar.images',
-    'mobile-bazaar.profile',
+    'mobile-bazaar.listing',
     'mobile-bazaar.login',
     'mobile-bazaar.mocks',
+    'mobile-bazaar.profile',
     'ngMaterial',
     'ngMdIcons',
-    'ui.router',
-    'ngStorage'
+    'ngStorage',
+    'ui.router'    
   ]);
       
 }());
