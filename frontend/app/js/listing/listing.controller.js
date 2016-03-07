@@ -13,6 +13,12 @@
       'Physical Item',
       'Digital Item',
       'Service'
+    ];
+    
+    vm.countries = [
+      'United States',
+      'Canada',
+      'Mexicon'
     ]
     
   }

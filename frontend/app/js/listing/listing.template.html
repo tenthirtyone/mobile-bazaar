@@ -8,7 +8,7 @@
 </md-input-container>  
 
 <md-input-container class="md-block" flex-gt-sm>
-  <label style="color: #fff;">Type</label>
+  <label>Type</label>
   <md-select ng-model="listing.type">
     <md-option ng-repeat="type in listing.types" value="{{type}}">
       {{type}}
@@ -21,8 +21,8 @@
   <input ng-model="listing.condition">
 </md-input-container>  
   
-<label>NSFW</label>
-<md-switch ng-model="listing.nsfw"></md-switch>
+<label>NSFW 18+</label>
+  <md-switch ng-model="listing.nsfw"><div ng-show="listing.nsfw">18+ Content</div></md-switch>
   
 <md-input-container class="md-block">
   <label>Description</label>
@@ -41,7 +41,17 @@
   
 <h2>Shipping</h2>
 
-<ob-editable heading="Processing Time" data="listing.processing"></ob-editable>  
+  
+<md-input-container class="md-block" flex-gt-sm>
+  <label>Processing Time</label>
+  <input ng-model="listing.processingTime">
+</md-input-container>
+  
+  
+
+  
+  
+  
 Ships to []
 Free Shipping Yes/No
 Domestic Shipping Price (BTC)
@@ -59,7 +69,8 @@ Tags []
 <ob-editable heading="Return Policy (Optional)" data="listing.returnPolicy"></ob-editable>  
 
 <h2>Expiration (Optional)</h2>
-Date
+<md-datepicker ng-model="user.submissionDate" md-placeholder="Enter date">
+</md-datepicker>
 
 Save Listing
 
