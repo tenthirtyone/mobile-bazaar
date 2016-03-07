@@ -1,4 +1,4 @@
-<md-content md-theme="docs-dark">
+<md-content>
 
 <h2>About</h2>
   
@@ -22,7 +22,9 @@
 </md-input-container>  
   
 <label>NSFW 18+</label>
-  <md-switch ng-model="listing.nsfw"><div ng-show="listing.nsfw">18+ Content</div></md-switch>
+  <md-switch ng-model="listing.nsfw">
+    <div ng-show="listing.nsfw">18+ Content</div>
+  </md-switch>
   
 <md-input-container class="md-block">
   <label>Description</label>
@@ -41,23 +43,41 @@
   
 <h2>Shipping</h2>
 
-  
-<md-input-container class="md-block" flex-gt-sm>
+  <md-input-container class="md-block" flex-gt-sm>
   <label>Processing Time</label>
   <input ng-model="listing.processingTime">
-</md-input-container>
+  </md-input-container>
+    
+Ships to []<br>
+  
+  <label>Free Shipping</label>
+  <md-switch ng-model="listing.nsfw">
+    <div ng-show="listing.nsfw">Free Shipping</div>
+  </md-switch>
   
   
-
+      <md-input-container class="md-block">
+        <label>Domestic Shipping (BTC)</label>
+        <input required type="number" step="any" ng-model="listing.domesticRate" min="0.0001"
+               max="100" ng-pattern="/^[+]?([0-9]+(?:[\.][0-9]*)?|\.[0-9]+)$/" />
+        
+      </md-input-container>
+      <md-input-container class="md-block">
+        <label>International Shipping (BTC)</label>
+        <input required type="number" step="any" ng-model="listing.internationalRate" min="0.0001"
+               max="100" ng-pattern="/^[+]?([0-9]+(?:[\.][0-9]*)?|\.[0-9]+)$/" />
+        
+      </md-input-container>
   
+<md-input-container class="md-block" flex-gt-sm>
+  <label>Domestic Shipping Time</label>
+  <input ng-model="listing.domesticShipTime" placeholder="3-5 Days">
+</md-input-container> 
   
-  
-Ships to []
-Free Shipping Yes/No
-Domestic Shipping Price (BTC)
-International Shipping Price (BTC)
-<ob-editable heading="Domestic Shipping Time" data="listing.domesticShipping"></ob-editable>  
-<ob-editable heading="International Shipping Time" data="listing.internationalShipping"></ob-editable>  
+<md-input-container class="md-block" flex-gt-sm>
+  <label>International Shipping Time</label>
+  <input ng-model="listing.internationalShipTime" placeholder="7-15 Days">
+</md-input-container>   
 
 <h2>Categorization (Optional)</h2>
 Categories[]
