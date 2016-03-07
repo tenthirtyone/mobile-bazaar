@@ -18,6 +18,12 @@
       'Service'
     ];
     
+    vm.conditions = [
+      'New',
+      'Like New',
+      'Used'
+    ] 
+    
     vm.countries = [
       'United States',
       'Canada',

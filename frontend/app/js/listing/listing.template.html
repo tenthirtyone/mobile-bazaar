@@ -1,110 +1,88 @@
 <md-content>
-
-<h3>About</h3>
-  
-<md-input-container class="md-block" flex-gt-sm>
-  <label>Title</label>
-  <input ng-model="listing.title">
-</md-input-container>  
-
-<md-input-container class="md-block" flex-gt-sm>
-  <label>Type</label>
-  <md-select ng-model="listing.type">
-    <md-option ng-repeat="type in listing.types" value="{{type}}">
-      {{type}}
-    </md-option>
-  </md-select>
-</md-input-container>  
-
-<md-input-container class="md-block" flex-gt-sm>
-  <label>Condition</label>
-  <input ng-model="listing.condition">
-</md-input-container>  
-  
-<label>NSFW 18+</label>
+  <h3>About</h3>
+  <md-input-container class="md-block" flex-gt-sm>
+    <label>Title</label>
+    <input ng-model="listing.title">
+  </md-input-container>
+  <md-input-container class="md-block" flex-gt-sm>
+    <label>Type</label>
+    <md-select ng-model="listing.type">
+      <md-option ng-repeat="type in listing.types" value="{{type}}">
+        {{type}}
+      </md-option>
+    </md-select>
+  </md-input-container>
+  <md-input-container class="md-block" flex-gt-sm>
+    <label>Condition</label>
+    <md-select ng-model="listing.condition">
+      <md-option ng-repeat="condition in listing.conditions" value="{{condition}}">
+        {{condition}}
+      </md-option>
+    </md-select>
+  </md-input-container>
+  <label>NSFW 18+</label>
   <md-switch ng-model="listing.nsfw">
     <div ng-show="listing.nsfw">18+ Content</div>
   </md-switch>
-  
-<md-input-container class="md-block">
-  <label>Description</label>
-  <textarea ng-model="listing.description" md-maxlength="150" rows="5" md-select-on-focus></textarea>
-</md-input-container>
-  
-<md-input-container class="md-block">
-  <label>Price</label>
-  <input required type="number" step="any" ng-model="listing.price" min="0.0015"
-         max="100" ng-pattern="/^[+]?([0-9]+(?:[\.][0-9]*)?|\ .[0-9]+)$/" />
-
-</md-input-container>
-
-<md-input-container class="md-block" flex-gt-sm>
-  <label>SKU</label>
-  <input ng-model="listing.sku">
-</md-input-container>  
-  
-<h3>Shipping</h3>
-
-  <md-input-container class="md-block" flex-gt-sm>
-  <label>Processing Time</label>
-  <input ng-model="listing.processingTime">
+  <md-input-container class="md-block">
+    <label>Description</label>
+    <textarea ng-model="listing.description" md-maxlength="150" rows="5" md-select-on-focus></textarea>
   </md-input-container>
-    
-Ships to []<br>
-  
+  <md-input-container class="md-block">
+    <label>Price</label>
+    <input required type="number" step="any" ng-model="listing.price" min="0.0015"
+      max="20999999" ng-pattern="/^[+]?([0-9]+(?:[\.][0-9]*)?|\ .[0-9]+)$/" />
+  </md-input-container>
+  <md-input-container class="md-block" flex-gt-sm>
+    <label>SKU</label>
+    <input ng-model="listing.sku" placeholder="Optional">
+  </md-input-container>
+  <h3>Shipping</h3>
+  <md-input-container class="md-block" flex-gt-sm>
+    <label>Processing Time</label>
+    <input ng-model="listing.processingTime" placeholder="Time needed to process order">
+  </md-input-container>
+  Ships to []<br>
   <label>Free Shipping</label>
-  <md-switch ng-model="listing.nsfw">
-    <div ng-show="listing.nsfw">Free Shipping</div>
+  <md-switch ng-model="listing.freeShipping">
+    <div ng-show="listing.freeShipping">Free Shipping</div>
   </md-switch>
-  
-  
-<md-input-container class="md-block">
-  <label>Domestic Shipping (BTC)</label>
-  <input required type="number" step="any" ng-model="listing.domesticRate" min="0.0001"
-         max="100" ng-pattern="/^[+]?([0-9]+(?:[\.][0-9]*)?|\.[0-9]+)$/" />
-
-</md-input-container>
-<md-input-container class="md-block">
-  <label>International Shipping (BTC)</label>
-  <input required type="number" step="any" ng-model="listing.internationalRate" min="0.0001"
-         max="100" ng-pattern="/^[+]?([0-9]+(?:[\.][0-9]*)?|\.[0-9]+)$/" />
-
-</md-input-container>
-  
-<md-input-container class="md-block" flex-gt-sm>
-  <label>Domestic Shipping Time</label>
-  <input ng-model="listing.domesticShipTime" placeholder="3-5 Days">
-</md-input-container> 
-  
-<md-input-container class="md-block" flex-gt-sm>
-  <label>International Shipping Time</label>
-  <input ng-model="listing.internationalShipTime" placeholder="7-15 Days">
-</md-input-container>   
-
-<h3>Categorization (Optional)</h3>
-<md-chips ng-model="listing.categories"></md-chips>
-
-<h3>Discover Tags (Optional)</h3>
-<md-chips ng-model="listing.discoverTags"></md-chips>
-
-<md-input-container class="md-block">
-  <label>Terms and Conditions</label>
-  <textarea ng-model="listing.terms" md-maxlength="150" rows="5" md-select-on-focus></textarea>
-</md-input-container>
-
-<md-input-container class="md-block">
-  <label>Terms and Conditions</label>
-  <textarea ng-model="listing.returnPolicy" md-maxlength="150" rows="5" md-select-on-focus></textarea>
-</md-input-container>
-
-<h2>Expiration (Optional)</h2>
-<md-datepicker ng-model="user.submissionDate" md-placeholder="Enter date">
-</md-datepicker>
-<br />
-<br />
-<br />
-<md-card-actions layout="column" layout-align="start">
-  <md-button class="md-raised">Create Listing</md-button>
-</md-card-actions>
-
+  <md-input-container class="md-block">
+    <label>Domestic Shipping (BTC)</label>
+    <input required type="number" step="any" ng-model="listing.domesticRate" min="0.0001"
+      max="100" ng-pattern="/^[+]?([0-9]+(?:[\.][0-9]*)?|\.[0-9]+)$/" />
+  </md-input-container>
+  <md-input-container class="md-block">
+    <label>International Shipping (BTC)</label>
+    <input required type="number" step="any" ng-model="listing.internationalRate" min="0.0001"
+      max="100" ng-pattern="/^[+]?([0-9]+(?:[\.][0-9]*)?|\.[0-9]+)$/" />
+  </md-input-container>
+  <md-input-container class="md-block" flex-gt-sm>
+    <label>Domestic Shipping Time</label>
+    <input ng-model="listing.domesticShipTime" placeholder="3-5 Days">
+  </md-input-container>
+  <md-input-container class="md-block" flex-gt-sm>
+    <label>International Shipping Time</label>
+    <input ng-model="listing.internationalShipTime" placeholder="7-15 Days">
+  </md-input-container>
+  <h3>Categorization (Optional)</h3>
+  <md-chips ng-model="listing.categories"></md-chips>
+  <h3>Discover Tags (Optional)</h3>
+  <md-chips ng-model="listing.discoverTags"></md-chips>
+  <md-input-container class="md-block">
+    <label>Terms and Conditions</label>
+    <textarea ng-model="listing.terms" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+  </md-input-container>
+  <md-input-container class="md-block">
+    <label>Terms and Conditions</label>
+    <textarea ng-model="listing.returnPolicy" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+  </md-input-container>
+  <h2>Expiration (Optional)</h2>
+  <md-datepicker ng-model="user.submissionDate" md-placeholder="Enter date"></md-datepicker>
+  <br />
+  <br />
+  <br />
+  <md-card-actions layout="column" layout-align="start">
+    <md-button class="md-raised">Create Listing</md-button>
+  </md-card-actions>
 </md-content>
