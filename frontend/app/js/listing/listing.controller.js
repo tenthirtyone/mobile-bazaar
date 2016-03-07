@@ -24,11 +24,8 @@
       'Used'
     ] 
     
-    vm.countries = [
-      'United States',
-      'Canada',
-      'Mexicon'
-    ]
+    
+    
     
   }
 }());
