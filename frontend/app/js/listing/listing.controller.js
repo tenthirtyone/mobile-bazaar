@@ -18,11 +18,14 @@
       'Service'
     ];
     
-    vm.countries = [
-      'United States',
-      'Canada',
-      'Mexicon'
-    ]
+    vm.conditions = [
+      'New',
+      'Like New',
+      'Used'
+    ] 
+    
+    
+    
     
   }
 }());
