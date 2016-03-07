@@ -1,0 +1,22 @@
+/*
+*
+* Start of my CSS
+*
+*/
+body {
+  background-color: #063753; }
+
+::selection {
+  background: #b4deff;
+  /* WebKit/Blink Browsers */ }
+
+::-moz-selection {
+  background: #b4deff;
+  /* Gecko Browsers */ }
+
+.transparent {
+  background-color: rgba(0, 0, 0, 0.01); }
+
+md-content {
+  background-color: #063753;
+  color: #ffffff; }

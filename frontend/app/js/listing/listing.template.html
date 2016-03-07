@@ -1,0 +1,67 @@
+<md-content md-theme="docs-dark">
+
+<md-input-container class="md-block" flex-gt-sm>
+  <label>Title</label>
+  <input ng-model="listing.title">
+</md-input-container>  
+
+<md-input-container class="md-block" flex-gt-sm>
+  <label style="color: #fff;">Type</label>
+  <md-select ng-model="listing.type">
+    <md-option ng-repeat="type in listing.types" value="{{type}}">
+      {{type}}
+    </md-option>
+  </md-select>
+</md-input-container>  
+
+<md-input-container class="md-block" flex-gt-sm>
+  <label>Condition</label>
+  <input ng-model="listing.condition">
+</md-input-container>  
+  
+
+<label>NSFW</label>
+<md-switch ng-model="listing.nsfw"></md-switch>
+
+  
+<md-input-container class="md-block" flex-gt-sm>
+  <label>Description</label>
+  <input ng-model="listing.description">
+</md-input-container>  
+  
+<md-input-container class="md-block" flex-gt-sm>
+  <label>Price</label>
+  <input ng-model="listing.price">
+</md-input-container>  
+
+<md-input-container class="md-block" flex-gt-sm>
+  <label>SKU</label>
+  <input ng-model="listing.sku">
+</md-input-container>  
+  
+Shipping
+
+<ob-editable heading="Processing Time" data="listing.processing"></ob-editable>  
+Ships to []
+Free Shipping Yes/No
+Domestic Shipping Price (BTC)
+International Shipping Price (BTC)
+<ob-editable heading="Domestic Shipping Time" data="listing.domesticShipping"></ob-editable>  
+<ob-editable heading="International Shipping Time" data="listing.internationalShipping"></ob-editable>  
+
+Categorization (Optional) 
+Categories[]
+
+Discover (Optional)
+Tags []
+
+<ob-editable heading="Terms and Conditions (Optional)" data="listing.toc"></ob-editable>  
+<ob-editable heading="Return Policy (Optional)" data="listing.returnPolicy"></ob-editable>  
+
+Expiration (Optional)
+Date
+
+
+Save Listing
+
+</md-content>

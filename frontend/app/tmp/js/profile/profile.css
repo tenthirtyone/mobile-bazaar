@@ -1,0 +1,39 @@
+.mb-profile-image {
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto; }
+
+md-content, mb-profile-content {
+  background-color: #063753;
+  color: #ffffff; }
+
+md-tabs.md-default-theme .md-tab, md-tabs .md-tab {
+  color: #fff; }
+
+md-tabs .md-tab.md-active {
+  color: #fff;
+  font-weight: 700; }
+
+md-tabs .md-tab.md-active {
+  color: #fff;
+  font-weight: 700; }
+
+md-icon.md-default-theme, md-icon {
+  color: #fff; }
+
+.avatar-image {
+  width: 100%; }
+
+.md-avatar {
+  width: 150px;
+  height: 150px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%; }
+
+md-list md-list-item.md-2-line .md-list-item-text h3,
+md-list md-list-item.md-2-line .md-list-item-text p {
+  color: #fff; }
