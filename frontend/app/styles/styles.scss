@@ -32,3 +32,11 @@ md-content {
 md-input-container:not(.md-input-invalid).md-input-has-value label {
   color: #fff;
 }
+
+md-select .md-select-value.md-select-placeholder {
+  color: #fff;
+}
+
+md-input-container label {
+  color: #fff;  
+}
