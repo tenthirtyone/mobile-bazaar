@@ -1,5 +1,7 @@
 <md-content md-theme="docs-dark">
 
+<h2>About</h2>
+  
 <md-input-container class="md-block" flex-gt-sm>
   <label>Title</label>
   <input ng-model="listing.title">
@@ -19,15 +21,13 @@
   <input ng-model="listing.condition">
 </md-input-container>  
   
-
 <label>NSFW</label>
 <md-switch ng-model="listing.nsfw"></md-switch>
-
   
-<md-input-container class="md-block" flex-gt-sm>
+<md-input-container class="md-block">
   <label>Description</label>
-  <input ng-model="listing.description">
-</md-input-container>  
+  <textarea ng-model="listing.description" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+</md-input-container>
   
 <md-input-container class="md-block" flex-gt-sm>
   <label>Price</label>
@@ -39,7 +39,7 @@
   <input ng-model="listing.sku">
 </md-input-container>  
   
-Shipping
+<h2>Shipping</h2>
 
 <ob-editable heading="Processing Time" data="listing.processing"></ob-editable>  
 Ships to []
@@ -49,18 +49,17 @@ International Shipping Price (BTC)
 <ob-editable heading="Domestic Shipping Time" data="listing.domesticShipping"></ob-editable>  
 <ob-editable heading="International Shipping Time" data="listing.internationalShipping"></ob-editable>  
 
-Categorization (Optional) 
+<h2>Categorization (Optional)</h2>
 Categories[]
 
-Discover (Optional)
+<h2>Discover (Optional)</h2>
 Tags []
 
 <ob-editable heading="Terms and Conditions (Optional)" data="listing.toc"></ob-editable>  
 <ob-editable heading="Return Policy (Optional)" data="listing.returnPolicy"></ob-editable>  
 
-Expiration (Optional)
+<h2>Expiration (Optional)</h2>
 Date
-
 
 Save Listing
 
