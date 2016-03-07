@@ -31,10 +31,12 @@
   <textarea ng-model="listing.description" md-maxlength="150" rows="5" md-select-on-focus></textarea>
 </md-input-container>
   
-<md-input-container class="md-block" flex-gt-sm>
+<md-input-container class="md-block">
   <label>Price</label>
-  <input ng-model="listing.price">
-</md-input-container>  
+  <input required type="number" step="any" ng-model="listing.price" min="0.0015"
+         max="100" ng-pattern="/^[+]?([0-9]+(?:[\.][0-9]*)?|\ .[0-9]+)$/" />
+
+</md-input-container>
 
 <md-input-container class="md-block" flex-gt-sm>
   <label>SKU</label>
@@ -56,18 +58,18 @@ Ships to []<br>
   </md-switch>
   
   
-      <md-input-container class="md-block">
-        <label>Domestic Shipping (BTC)</label>
-        <input required type="number" step="any" ng-model="listing.domesticRate" min="0.0001"
-               max="100" ng-pattern="/^[+]?([0-9]+(?:[\.][0-9]*)?|\.[0-9]+)$/" />
-        
-      </md-input-container>
-      <md-input-container class="md-block">
-        <label>International Shipping (BTC)</label>
-        <input required type="number" step="any" ng-model="listing.internationalRate" min="0.0001"
-               max="100" ng-pattern="/^[+]?([0-9]+(?:[\.][0-9]*)?|\.[0-9]+)$/" />
-        
-      </md-input-container>
+<md-input-container class="md-block">
+  <label>Domestic Shipping (BTC)</label>
+  <input required type="number" step="any" ng-model="listing.domesticRate" min="0.0001"
+         max="100" ng-pattern="/^[+]?([0-9]+(?:[\.][0-9]*)?|\.[0-9]+)$/" />
+
+</md-input-container>
+<md-input-container class="md-block">
+  <label>International Shipping (BTC)</label>
+  <input required type="number" step="any" ng-model="listing.internationalRate" min="0.0001"
+         max="100" ng-pattern="/^[+]?([0-9]+(?:[\.][0-9]*)?|\.[0-9]+)$/" />
+
+</md-input-container>
   
 <md-input-container class="md-block" flex-gt-sm>
   <label>Domestic Shipping Time</label>
