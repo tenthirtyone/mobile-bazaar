@@ -91,6 +91,7 @@ gulp.task('scss', ['clean'], function() {
 
 gulp.task('scripts', ['clean'], function(){
   return gulp.src([
+    'app/app.js',
     'app/**/*.module.js',
     'app/**/*.js' 
   ])
