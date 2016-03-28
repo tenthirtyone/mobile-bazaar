@@ -6,6 +6,7 @@ var AuthService = require("../services/AuthService.js");
 var ImageService = require("../services/ImageService.js");
 var FollowingService = require("../services/FollowingService.js");
 var ProfService = require("../services/ProfileService.js");
+var SaleService = require("../services/SaleService.js");
 
 module.exports = router;
 
@@ -106,6 +107,35 @@ router.get("/profile", function(req, res) {
           "Authorization": token.token
         });
         res.send({profile: profile.profile});        
+      }
+  });
+});
+
+router.get("/sales", function(req, res) {
+  async.waterfall([
+    function validateToken(callback) {
+      AuthService.checkToken(req.headers.authorization, function(err, token) {
+        if (err) {
+          return callback({error: err});
+        }
+        return callback(null, token);
+      });
+    },
+    function(token, callback) {
+      SaleService.getSales(function(err, sales){
+        if (err) {
+          return callback(err);
+        }  
+          return callback(null, token, sales);
+      });      
+    }], function(err, token, sales) {
+      if (err) {
+        res.status(404).json({error: err});
+      } else {
+        res.header({
+          "Authorization": token.token
+        });
+        res.send({sales: sales});        
       }
   });
 });
