@@ -5,7 +5,9 @@ var router = express.Router();
 var AuthService = require("../services/AuthService.js");
 var ImageService = require("../services/ImageService.js");
 var FollowingService = require("../services/FollowingService.js");
+var ListingService = require("../services/ListingService.js");
 var ProfService = require("../services/ProfileService.js");
+var SaleService = require("../services/SaleService.js");
 
 module.exports = router;
 
@@ -68,6 +70,35 @@ router.get("/image", function(req, res) {
   });  
 })
 
+router.get("/listings", function(req, res) {
+  async.waterfall([
+    function validateToken(callback) {
+      AuthService.checkToken(req.headers.authorization, function(err, token) {
+        if (err) {
+          return callback({error: err});
+        }
+        return callback(null, token);
+      });
+    },
+    function(token, callback) {
+      ListingService.getListings(function(err, listings){
+        if (err) {
+          return callback(err);
+        }  
+          return callback(null, token, listings);
+      });      
+    }], function(err, token, listings) {
+      if (err) {
+        res.status(404).json({error: err});
+      } else {
+        res.header({
+          "Authorization": token.token
+        });
+        res.send({listings: listings});        
+      }
+  });
+});
+
 router.get("/login", function(req, res) {
   AuthService.login(req.headers.authorization, function(err, token, result) {
     if (err) {
@@ -106,6 +137,35 @@ router.get("/profile", function(req, res) {
           "Authorization": token.token
         });
         res.send({profile: profile.profile});        
+      }
+  });
+});
+
+router.get("/sales", function(req, res) {
+  async.waterfall([
+    function validateToken(callback) {
+      AuthService.checkToken(req.headers.authorization, function(err, token) {
+        if (err) {
+          return callback({error: err});
+        }
+        return callback(null, token);
+      });
+    },
+    function(token, callback) {
+      SaleService.getSales(function(err, sales){
+        if (err) {
+          return callback(err);
+        }  
+          return callback(null, token, sales);
+      });      
+    }], function(err, token, sales) {
+      if (err) {
+        res.status(404).json({error: err});
+      } else {
+        res.header({
+          "Authorization": token.token
+        });
+        res.send({sales: sales});        
       }
   });
 });

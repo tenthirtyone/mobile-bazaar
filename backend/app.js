@@ -20,6 +20,8 @@ var corsOptions = {
   exposedHeaders: 'Authorization'
 };
 
+
+
 app.use(cors(corsOptions));
 app.use(helmet());
 
